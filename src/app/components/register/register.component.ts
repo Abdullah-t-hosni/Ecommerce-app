@@ -1,5 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/Shared/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -7,6 +10,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
+  constructor(private _AuthService: AuthService, private _Router: Router) {}
+
+  msgError: string = '';
+  isLoading: boolean = false;
+
   registerForm: FormGroup = new FormGroup({
     name: new FormControl('', [
       Validators.required,
@@ -18,14 +26,37 @@ export class RegisterComponent {
       Validators.required,
       Validators.pattern(/^[A-Z][a-z0-9]{6,20}$/),
     ]),
-    rePassword: new FormControl('' , [
+    rePassword: new FormControl('', [
       Validators.required,
       Validators.pattern(/^[A-Z][a-z0-9]{6,20}$/),
     ]),
-    phone: new FormControl('' , [Validators.required , Validators.pattern(/^01[0125][0-9]{8}$/)]),
+    phone: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^01[0125][0-9]{8}$/),
+    ]),
   });
 
-  onSubmit() {
-    console.log(this.registerForm.value);
+  onSubmit(): void {
+    if (this.registerForm.value) {
+
+
+      this.isLoading = true;
+
+      this._AuthService.setRegister(this.registerForm.value).subscribe({
+        next: (response) => {
+          if (response.message == 'success') {
+            this.isLoading = false;
+
+            this._Router.navigate(['/login']);
+          }
+        },
+        error: (err: HttpErrorResponse) => {
+          this.isLoading = false;
+          this.msgError = err.error.message;
+        }, 
+
+        complete: () => console.log('success'),
+      });
+    }
   }
 }
