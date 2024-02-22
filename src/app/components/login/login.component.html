@@ -5,6 +5,7 @@
       <div class="mb-2">
         <label for="email">email</label>
         <input
+        #inputEmail
           type="email"
           id="email"
           class="form-control"
@@ -15,7 +16,7 @@
           class="alert alert-danger"
           *ngIf="
             loginForm.get('email')?.errors &&
-            loginForm.get('email')?.touched
+            (loginForm.get('email')?.touched || inputEmail.value.length > 0)
           "
         >
           <p *ngIf="loginForm.get('email')?.hasError('required')">
@@ -29,6 +30,7 @@
       <div class="mb-2">
         <label for="password">password</label>
         <input
+        #inputPassword
           type="password"
           id="password"
           class="form-control"
@@ -39,7 +41,7 @@
           class="alert alert-danger"
           *ngIf="
             loginForm.get('password')?.errors &&
-            loginForm.get('password')?.touched
+           ( loginForm.get('password')?.touched || inputPassword.value.length > 0)
           "
         >
           <p *ngIf="loginForm.get('password')?.hasError('required')">
@@ -54,7 +56,7 @@
       <button
         [disabled]="loginForm.invalid"
         type="submit"
-        class="btn-main ms-auto d-block"
+        class="btn-main m-auto d-block"
       >
         <i><i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i></i>
         Login
