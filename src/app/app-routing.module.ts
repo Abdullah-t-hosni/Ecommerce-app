@@ -14,6 +14,8 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 
 const routes: Routes = [
 
+  { path: '', redirectTo: 'home', pathMatch: 'full'},
+
   { path: '', component: BlankLayoutComponent, children: [
     {path:'',redirectTo:'home',pathMatch:'full'},
     {path:'home',component: HomeComponent},
