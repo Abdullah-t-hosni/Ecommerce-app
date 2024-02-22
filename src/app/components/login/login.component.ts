@@ -36,7 +36,8 @@ export class LoginComponent {
         next: (response) => {
           if (response.message == 'success') {
             this.isLoading = false;
-
+            localStorage.setItem('eToken', response.token);
+            this._AuthService.saveUserData();
             this._Router.navigate(['/home']);
           }
         },
