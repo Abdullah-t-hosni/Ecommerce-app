@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -17,8 +16,15 @@ import { NavBlankComponent } from './components/nav-blank/nav-blank.component';
 import { NavAuthComponent } from './components/nav-auth/nav-auth.component';
 import { BlankLayoutComponent } from './components/blank-layout/blank-layout.component';
 import { AuthLayoutComponent } from './components/auth-layout/auth-layout.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import  {HttpClientModule} from '@angular/common/http';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { MainSliderComponent } from './components/main-slider/main-slider.component';
+import { SliderWrapperComponent } from './components/slider-wrapper/slider-wrapper.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {CarouselModule } from 'ngx-owl-carousel-o';
+import { termtextPipe } from './termtext.pipe';
+import { SearchPipe } from './search.pipe';
 
 @NgModule({
   declarations: [
@@ -37,13 +43,21 @@ import  {HttpClientModule} from '@angular/common/http';
     NavAuthComponent,
     BlankLayoutComponent,
     AuthLayoutComponent,
+    ForgotPasswordComponent,
+    MainSliderComponent,
+    SliderWrapperComponent,
+    termtextPipe,
+    SearchPipe,
+  
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
-    
+    HttpClientModule,
+    BrowserAnimationsModule,
+    CarouselModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

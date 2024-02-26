@@ -12,6 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { authGuard } from './Shared/guards/auth.guard';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 const routes: Routes = [
 
@@ -27,12 +28,14 @@ const routes: Routes = [
     {path:'brands',component: BrandsComponent},
     {path:'categories',component: CategoriesComponent},
     {path:'details/:id',component: DetailsComponent},
+    
   ]},
 
   {path:'',component: AuthLayoutComponent, children:
   [
     {path:'login',component: LoginComponent},
     {path:'register',component: RegisterComponent},
+    {path:'forgot-password',component: ForgotPasswordComponent},
   ]},
 
 

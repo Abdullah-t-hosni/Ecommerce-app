@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from 'src/app/Shared/interfaces/product';
 import { EcomdataService } from 'src/app/Shared/services/ecomdata.service';
+import { Product } from 'src/app/Shared/interfaces/product';
+import { OwlOptions } from 'ngx-owl-carousel-o';
+
 
 
 @Component({
@@ -12,6 +14,19 @@ import { EcomdataService } from 'src/app/Shared/services/ecomdata.service';
 export class DetailsComponent implements OnInit {
 
   constructor(private _ActivatedRoute:ActivatedRoute , private _EcomdataService:EcomdataService) { }
+
+
+  detailsSlider: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: false,
+    dots: true,
+    navSpeed: 700,
+    navText: ['', ''],
+    items: 1,
+    nav: false
+  }
 
   productDetails:Product = {} as Product;
   ngOnInit(): void {
