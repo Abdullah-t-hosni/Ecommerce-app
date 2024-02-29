@@ -1,55 +1,53 @@
 import { Component, OnInit } from '@angular/core';
+import { Cart } from 'src/app/Shared/interfaces/cart';
 import { CartService } from 'src/app/Shared/services/cart.service';
-
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
 
-  cartDetails:any= {};
+  cartDetails:any = {};
 
-  constructor(private _CartService: CartService) { 
-  }
+  constructor(private _CartService: CartService) {}
 
-  removeFromCart(id:string): void {
+  removeFromCart(id: string): void {
     this._CartService.removeItem(id).subscribe({
       next: (response) => {
-        this.cartDetails = response.data
+        this.cartDetails = response.data;
       },
-
       error: (err) => {
-        console.log(err);
-      }
-      
-    })
+        console.error(err);
+      },
+    });
   }
 
-  changeCount(id:string , count:number): void {
-    this._CartService.updateCartQuantity(id,count).subscribe({
+  changeCount(id: string, count: number): void {
+    this._CartService.updateCartQuantity(id, count).subscribe({
       next: (response) => {
-        
-        this.cartDetails = response.data
+        this.cartDetails = response.data;
       },
       error: (err) => {
-        console.log(err);
-      }
-    })
+        console.error(err);
+      },
+    });
   }
+
   ngOnInit(): void {
+    this.getCart();
+  }
+
+  getCart(): void {
     this._CartService.getUserCart().subscribe({
       next: (response) => {
-        
-        this.cartDetails = response.data
+        console.log(response);
+        this.cartDetails = response.data;
       },
-
       error: (err) => {
-        console.log(err);
-      }
-    })
+        console.error(err);
+      },
+    });
   }
-
-  
 }

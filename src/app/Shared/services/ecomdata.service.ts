@@ -12,7 +12,7 @@ export class EcomdataService {
   getAllProducts(): Observable<any> {
     return this._HttpClient.get('https://ecommerce.routemisr.com/api/v1/products');
 
-    
+     
   }
 
   getProductDetails(id:string): Observable<any> {

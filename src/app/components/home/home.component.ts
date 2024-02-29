@@ -9,7 +9,6 @@ import { EcomdataService } from 'src/app/Shared/services/ecomdata.service';
 export class HomeComponent {
   constructor(
     private _ecomdataService: EcomdataService,
-    
   ) {}
 
 

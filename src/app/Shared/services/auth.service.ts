@@ -18,13 +18,10 @@ export class AuthService {
     }
 
   saveUserData() {
-
     if (localStorage.getItem('eToken') != null) {
       let encodeToken:any = localStorage.getItem('eToken');
       let decodedToken = jwtDecode(encodeToken);
-
       this.UserData = decodedToken
-      
     }
   }
 
