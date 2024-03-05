@@ -1,1 +1,13 @@
-<p>brands works!</p>
+<section class="m-5">
+    <div class="container-fluid" >
+        <div class="row">
+            <ng-container *ngFor="let item of brands" >
+                <div class="col-md-3">
+                    <div  >
+                        <img [src]="item.image" class="w-100" [alt]="item.title">
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</section>

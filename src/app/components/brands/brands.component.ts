@@ -1,10 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { EcomdataService } from 'src/app/Shared/services/ecomdata.service';
 
 @Component({
   selector: 'app-brands',
   templateUrl: './brands.component.html',
   styleUrls: ['./brands.component.css']
 })
-export class BrandsComponent {
+export class BrandsComponent implements OnInit {
+
+  constructor( private _EcomdataService:EcomdataService) { }
+
+  brands:any[]=[];
+
+  ngOnInit(): void {
+    
+    this._EcomdataService.getBrands().subscribe({
+      next:(response)=>{
+        this.brands=response.data;
+        
+      },
+      error:(err)=>{
+        console.log(err)
+      }
+
+    })
+
+  }
 
 }

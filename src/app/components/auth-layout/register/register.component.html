@@ -80,7 +80,7 @@
     <div class="mb-2">
       <label for="rePassword">rePassword</label>
       <input
-        type="password"
+        type="password" 
         id="rePassword"
         class="form-control"
         formControlName="rePassword"
@@ -93,12 +93,11 @@
           registerForm.get('rePassword')?.touched
         "
       >
-        <p *ngIf="registerForm.get('rePassword')?.hasError('required')">
-          rePassword is required
-        </p>
-        <p *ngIf="registerForm.get('rePassword')?.hasError('pattern')">
-          password must start with upperCase then from 6 to 10
-        </p>
+      <p *ngIf="registerForm.get('rePassword')?.hasError('required')">
+        rePassword is required
+      </p>
+        <p *ngIf="registerForm.get('rePassword')?.hasError('rePasswordNotMatch')">
+           Password Not Matched </p>
       </div>
     </div>
 

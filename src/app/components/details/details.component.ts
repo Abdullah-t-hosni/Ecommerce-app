@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EcomdataService } from 'src/app/Shared/services/ecomdata.service';
 import { Product } from 'src/app/Shared/interfaces/product';
@@ -17,7 +17,8 @@ export class DetailsComponent implements OnInit {
     private _ActivatedRoute: ActivatedRoute,
     private _EcomdataService: EcomdataService,
     private _CartService: CartService,
-    private _ToastrService: ToastrService
+    private _ToastrService: ToastrService,
+    private _Renderer2:Renderer2
   ) {}
 
     product: any
@@ -54,15 +55,22 @@ export class DetailsComponent implements OnInit {
     });
   }
 
-  addCart(id: string): void {
+
+
+  addCart(id: string ,element:HTMLButtonElement ): void {
+    this._Renderer2.setAttribute(element, 'disabled', 'true');
     this._CartService.addToCart(id).subscribe({
       next: (response) => {
-        console.log(response);
+       
         this._ToastrService.success(response.message);
+        this._Renderer2.removeAttribute(element, 'disabled');
+        this._CartService.numOfCartItems.next(
+          response.numOfCartItems
+        )
       },
 
       error: (err) => {
-        console.log(err);
+        this._Renderer2.removeAttribute(element, 'disabled');
       },
     });
   }

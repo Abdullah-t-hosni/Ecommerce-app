@@ -16,6 +16,9 @@ export class MainSliderComponent {
     pullDrag: false,
     dots: false,
     navSpeed: 700,
+    autoplay: true,
+    autoplayTimeout: 2000,
+    autoplaySpeed: 1000,
     navText: ['', ''],
     items: 1,
     nav: true

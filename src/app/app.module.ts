@@ -32,8 +32,10 @@ import { CartComponent } from './components/cart/cart.component';
 import { FilterProductsPipe } from './filter-products.pipe';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { OrdersComponent } from './components/orders/orders.component';
-import { HttpInterceptorInterceptor } from './http-interceptor.interceptor';
-
+import { HttpInterceptorInterceptor } from './interceptors/http.interceptor';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { WhishlistComponent } from './components/whishlist/whishlist.component';
 
 @NgModule({
   declarations: [
@@ -62,9 +64,9 @@ import { HttpInterceptorInterceptor } from './http-interceptor.interceptor';
     FilterProductsPipe,
     CheckoutComponent,
     OrdersComponent,
-    
+    WhishlistComponent,
   ],
-  
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -75,13 +77,16 @@ import { HttpInterceptorInterceptor } from './http-interceptor.interceptor';
     FormsModule,
     ToastrModule.forRoot(),
     RxReactiveFormsModule,
-    
+    NgxSpinnerModule,
   ],
-  providers: [{
-
-    provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorInterceptor, multi: true
-  }],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorInterceptor,
+      multi: true,
+    },
+    {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true}
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

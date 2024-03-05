@@ -1,45 +1,35 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Product } from 'src/app/Shared/interfaces/product';
+import { WhishlistService } from 'src/app/Shared/services/whishlist.service';
+import { RouterLink } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { CartService } from 'src/app/Shared/services/cart.service';
 import { EcomdataService } from 'src/app/Shared/services/ecomdata.service';
-import { Product } from 'src/app/Shared/interfaces/product';
-import { ToastrService } from 'ngx-toastr';
-import { WhishlistService } from 'src/app/Shared/services/whishlist.service';
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css'],
+  selector: 'app-whishlist',
+  templateUrl: './whishlist.component.html',
+  styleUrls: ['./whishlist.component.css'],
 })
-export class ProductsComponent implements OnInit {
+export class WhishlistComponent implements OnInit {
+  listDetails: any = {};
   products: Product[] = [];
-  searchTerm: string = '';
   wishListData: string[] = [];
 
   constructor(
-    private _EcomdataService: EcomdataService,
+    private _WhishlistService: WhishlistService,
     private _ToastrService: ToastrService,
     private _CartService: CartService,
-    private _Renderer2: Renderer2,
-    private _WhishlistService: WhishlistService
+    private _EcomdataService: EcomdataService,
+    private _Renderer2: Renderer2
   ) {}
 
   ngOnInit(): void {
-    //get All Products..
-    this.getAllProducts();
-
     this._WhishlistService.getWishList().subscribe({
       next: (response) => {
-        console.log('wishlist' , response.data);
-        const newData = response.data.map((item: any) => item._id)
-        this.wishListData = newData
-      }
-    })
-  }
-
-  getAllProducts() {
-    this._EcomdataService.getAllProducts().subscribe({
-      next: (response) => {
         this.products = response.data;
+        const newData = response.data.map((item: any) => item._id);
+        this.wishListData = newData;
       },
       error: (err) => {
         console.log(err);
@@ -61,11 +51,11 @@ export class ProductsComponent implements OnInit {
       },
     });
   }
-
   addFav(id: string): void {
     this._WhishlistService.addToWishList(id).subscribe({
       next: (response) => {
         console.log(response);
+
         this._ToastrService.success(response.message);
         this.wishListData = response.data;
       },
@@ -78,6 +68,11 @@ export class ProductsComponent implements OnInit {
         console.log(response);
         this._ToastrService.success(response.message);
         this.wishListData = response.data;
+
+        const newList = this.products.filter((item) =>
+          this.wishListData.includes(item._id)
+        );
+        this.products = newList;
       },
     });
   }

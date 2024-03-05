@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class BlankLayoutComponent {
 
+
+  scrollToTop(): void {
+    scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
 }

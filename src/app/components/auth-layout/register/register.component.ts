@@ -15,27 +15,46 @@ export class RegisterComponent {
   msgError: string = '';
   isLoading: boolean = false;
 
-  registerForm: FormGroup = new FormGroup({
-    
-    name: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(20),
-    ]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^[A-Z][a-z0-9]{6,20}$/),
-    ]),
-    rePassword: new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^[A-Z][a-z0-9]{6,20}$/),
-    ]),
-    phone: new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^01[0125][0-9]{8}$/),
-    ]),
-  });
+  registerForm: FormGroup = new FormGroup(
+    {
+      name: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(20),
+      ]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[A-Z][a-z0-9]{6,20}$/),
+      ]),
+      rePassword: new FormControl('', [
+        Validators.required
+      ]),
+      phone: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^01[0125][0-9]{8}$/),
+      ]),
+    },
+    {
+      validators: this.validateRePassword
+    }
+  )
+
+  validateRePassword(registerForm: any) {
+    let passwordControl = registerForm.get('password');
+    let rePasswordControl = registerForm.get('rePassword');
+
+    if (
+      passwordControl.value == rePasswordControl.value
+    ) {
+      return null;
+    } else {
+      rePasswordControl.setErrors({
+        rePasswordNotMatch: 'password and rePassword not match',
+      });
+      return { rePasswordNotMatch: 'password and rePassword not match' };
+    }
+  }
 
   onSubmit(): void {
     if (this.registerForm.value) {
@@ -50,25 +69,20 @@ export class RegisterComponent {
         error: (err: HttpErrorResponse) => {
           this.isLoading = false;
           this.msgError = err.error.message;
-        }, 
+        },
 
         complete: () => console.log('success'),
       });
     }
   }
 
-
-
-
-//   markAllAsTouched(form: FormGroup): void {
-//     Object.values(form.controls).forEach((control:any) => {
-//       control.markAsTouched();
-//       if (control.control) {
-//         this.markAllAsTouched(control);
-//       }
-//     })
-//   }
-// 
-
-
+  //   markAllAsTouched(form: FormGroup): void {
+  //     Object.values(form.controls).forEach((control:any) => {
+  //       control.markAsTouched();
+  //       if (control.control) {
+  //         this.markAllAsTouched(control);
+  //       }
+  //     })
+  //   }
+  //
 }

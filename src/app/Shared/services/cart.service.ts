@@ -52,10 +52,14 @@ export class CartService {
 
   generateOnlinePayment(cartId: string, shippingAddress: any): Observable<any> {
     return this._HttpClient.post(
-      `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=http://localhost:4200`,
+      `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=https://abdullah-t-hosni.github.io/Ecommerce-app/allorders`,
       { shippingAddress: shippingAddress },
     );
   }
 
 
+  removeCart(): Observable<any> {
+    return this._HttpClient.delete(
+      `https://ecommerce.routemisr.com/api/v1/cart`,
+    );}
 }

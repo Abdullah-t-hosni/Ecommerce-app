@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Cart } from 'src/app/Shared/interfaces/cart';
 import { CartService } from 'src/app/Shared/services/cart.service';
 
@@ -44,6 +45,21 @@ export class CartComponent implements OnInit {
       next: (response) => {
         console.log(response);
         this.cartDetails = response.data;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+
+  clearCart(): void {
+    this._CartService.removeCart().subscribe({
+      next: (response) => {
+        if(response.message === 'success'){
+          this.cartDetails = null;
+          this.getCart();
+        }
+      
       },
       error: (err) => {
         console.error(err);

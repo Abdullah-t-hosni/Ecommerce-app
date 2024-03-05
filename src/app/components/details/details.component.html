@@ -22,7 +22,7 @@
           <span class="text-muted">{{ productDetails.ratingsAverage }}</span>
         </div>
       </div>
-      <button (click)="addCart(productDetails._id)" class="btn-main w-100">Add To Cart</button>
+      <button (click)="addCart(productDetails._id, btnAdd)" #btnAdd class="btn-main w-100">Add To Cart</button>
     </div>
   </div>
 </section>

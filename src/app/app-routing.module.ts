@@ -15,6 +15,7 @@ import { authGuard } from './Shared/guards/auth.guard';
 import { ForgotPasswordComponent } from './components/auth-layout/forgot-password/forgot-password.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { OrdersComponent } from './components/orders/orders.component';
+import { WhishlistComponent } from './components/whishlist/whishlist.component';
 
 const routes: Routes = [
 
@@ -32,6 +33,7 @@ const routes: Routes = [
     { path: 'cart', component: CartComponent},
     {path: 'checkout/:cartId', component: CheckoutComponent, canActivate: [authGuard]},
     {path: 'allorders', component: OrdersComponent, canActivate: [authGuard]},
+    {path: 'whishlist', component: WhishlistComponent, canActivate: [authGuard]},
 
   ]},
 
