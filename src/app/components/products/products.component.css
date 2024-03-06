@@ -5,16 +5,17 @@
 
 .product:hover{
     .heart{
-        left: 10px;
+        right: 10px;
     }
 }
 
 .heart{
+    font-size: 25px;
     position: absolute;
     top: 10px;
-    left: -30px;
+    right: -30px;
     cursor: pointer;
     z-index: 99;
-    transition: left 0.5s;
+    transition: right 0.5s;
 }
 

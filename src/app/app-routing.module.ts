@@ -19,7 +19,6 @@ import { WhishlistComponent } from './components/whishlist/whishlist.component';
 
 const routes: Routes = [
 
-  { path: '', redirectTo: 'home', pathMatch: 'full'},
 
   { path: '',
   canActivate: [authGuard],

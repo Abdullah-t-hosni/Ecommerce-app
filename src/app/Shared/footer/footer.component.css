@@ -1,5 +1,16 @@
 .img {
-    width: 60px;
-    height: 20px;
+    width: 110px;
+    height: 35px;
     border-radius: 5px;
+}
+
+.fpay{
+    width: 80px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+.icon li a {
+    font-size: 20px;
+    margin-right: 10px;
 }

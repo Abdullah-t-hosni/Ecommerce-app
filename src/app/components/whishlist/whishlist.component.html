@@ -3,11 +3,9 @@
   <div class="row g-4">
     <div class="col-md-2" *ngFor="let product of products">
       <div class="product">
-     
         <i
-
           (click)="removeFav(product._id)"
-          class="fa-solid fa-heart heart"
+          class="fa-solid fa-heart heart text-danger"
         ></i>
         <div
           class="p-2 cursor-pointer"
