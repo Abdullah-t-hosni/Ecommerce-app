@@ -20,7 +20,8 @@ import { SubcategoriesComponent } from './components/categories/subcategories/su
 
 const routes: Routes = [
 
-
+ 
+  
   {
     
     path: '',
