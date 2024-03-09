@@ -19,7 +19,10 @@ import { WhishlistComponent } from './components/whishlist/whishlist.component';
 import { SubcategoriesComponent } from './components/categories/subcategories/subcategories.component';
 
 const routes: Routes = [
+
+
   {
+    
     path: '',
     canActivate: [authGuard],
     component: BlankLayoutComponent,
@@ -32,21 +35,11 @@ const routes: Routes = [
       { path: 'details/:id', component: DetailsComponent },
       { path: 'cart', component: CartComponent },
       { path: 'subcategories/:id', component: SubcategoriesComponent },
-      {
-        path: 'checkout/:cartId',
-        component: CheckoutComponent,
-        canActivate: [authGuard],
-      },
-      {
-        path: 'allorders',
-        component: OrdersComponent,
-        canActivate: [authGuard],
-      },
-      {
-        path: 'whishlist',
-        component: WhishlistComponent,
-        canActivate: [authGuard],
-      },
+      {path: 'checkout/:cartId',component: CheckoutComponent,canActivate: [authGuard],},
+      { path: 'allorders',component: OrdersComponent,canActivate: [authGuard],},
+      {path: 'whishlist',component: WhishlistComponent,canActivate: [authGuard],},
+
+      
       {
         path: '',
         component: AuthLayoutComponent,
