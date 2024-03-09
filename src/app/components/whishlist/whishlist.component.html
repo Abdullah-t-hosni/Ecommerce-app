@@ -1,4 +1,7 @@
-<section class="p-4 rounded mt-5 w-75 mx-auto">
+<section class="p-4 rounded mt-5 w-75 mx-auto"
+*ngIf="wishListData; else msg"
+
+>
   <h1 class="text-center">Wishlist</h1>
   <div class="row g-4">
     <div class="col-md-2" *ngFor="let product of products">
@@ -36,3 +39,8 @@
     </div>
   </div>
 </section>
+
+
+<ng-template #msg>
+  <h2 class="text-center"> Your Wishlist Is Empty... </h2>
+</ng-template>

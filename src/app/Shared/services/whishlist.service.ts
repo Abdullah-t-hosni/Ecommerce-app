@@ -15,6 +15,7 @@ export class WhishlistService {
 
 
   constructor(private _HttpClient: HttpClient) {
+    
     this.getWishList().subscribe({
       next: (response) => {
         this.numOfWishItems.next(response.numOfWishItems);
@@ -36,10 +37,5 @@ export class WhishlistService {
     return this._HttpClient.delete(this.baseUrl + `wishlist/${id}`);
   }
 
-  updateCartQuantity(productId: string, count: number): Observable<any> {
-    return this._HttpClient.put(
-      `https://ecommerce.routemisr.com/api/v1/wishlist/${productId}`,
-      { count: count }
-    );
-  }
+
 }

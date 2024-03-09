@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Cart } from 'src/app/Shared/interfaces/cart';
+import { Router } from '@angular/router';
 import { CartService } from 'src/app/Shared/services/cart.service';
+import { Product } from 'src/app/Shared/interfaces/product';
 
 @Component({
   selector: 'app-cart',
@@ -9,19 +9,17 @@ import { CartService } from 'src/app/Shared/services/cart.service';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
+  cartDetails: any = null;
+  product: Product[] = [];
 
-  cartDetails:any = {};
-
-  constructor(private _CartService: CartService) {}
+  constructor(private _CartService: CartService, private _Router: Router) {}
 
   removeFromCart(id: string): void {
     this._CartService.removeItem(id).subscribe({
       next: (response) => {
         this.cartDetails = response.data;
       },
-      error: (err) => {
-        console.error(err);
-      },
+   
     });
   }
 
@@ -30,9 +28,7 @@ export class CartComponent implements OnInit {
       next: (response) => {
         this.cartDetails = response.data;
       },
-      error: (err) => {
-        console.error(err);
-      },
+   
     });
   }
 
@@ -43,27 +39,20 @@ export class CartComponent implements OnInit {
   getCart(): void {
     this._CartService.getUserCart().subscribe({
       next: (response) => {
-        console.log(response);
         this.cartDetails = response.data;
       },
-      error: (err) => {
-        console.error(err);
-      },
+
     });
   }
 
-  clearCart(): void {
-    this._CartService.removeCart().subscribe({
+  clear(): void {
+    this._CartService.clearCart().subscribe({
       next: (response) => {
-        if(response.message === 'success'){
+        if (response.message === 'success') {
           this.cartDetails = null;
-          this.getCart();
         }
-      
       },
-      error: (err) => {
-        console.error(err);
-      },
+
     });
   }
 }

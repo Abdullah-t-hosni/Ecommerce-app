@@ -1,47 +1,50 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { CartService } from 'src/app/Shared/services/cart.service';
+import { ActivatedRoute } from '@angular/router';
 import { EcomdataService } from 'src/app/Shared/services/ecomdata.service';
 import { Product } from 'src/app/Shared/interfaces/product';
+import { CartService } from 'src/app/Shared/services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { WhishlistService } from 'src/app/Shared/services/whishlist.service';
+import { Subcategories } from 'src/app/Shared/interfaces/subcategories';
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css'],
+  selector: 'app-subcategories',
+  templateUrl: './subcategories.component.html',
+  styleUrls: ['./subcategories.component.css'],
 })
-export class ProductsComponent implements OnInit {
-  products: Product[] = [];
-  searchTerm: string = '';
-  wishListData: string[] = [];
-
+export class SubcategoriesComponent implements OnInit {
   constructor(
+    private _ActivatedRoute: ActivatedRoute,
     private _EcomdataService: EcomdataService,
-    private _ToastrService: ToastrService,
     private _CartService: CartService,
+    private _ToastrService: ToastrService,
     private _Renderer2: Renderer2,
     private _WhishlistService: WhishlistService
   ) {}
 
+  subCategories: any = [];
+  product: Product[] = [];
+  wishListData: string[] = [];
+
+
   ngOnInit(): void {
-    //get All Products..
-    this.getAllProducts();
+    //get SubCategories..
+    this._ActivatedRoute.paramMap.subscribe({
+      next: (params) => {
+        let categoryId: any = params.get('id');
 
-    this._WhishlistService.getWishList().subscribe({
-      next: (response) => {
-        const newData = response.data.map((item: any) => item._id)
-        this.wishListData = newData
-      }
-    })
-  }
-
-  getAllProducts() {
-    this._EcomdataService.getAllProducts().subscribe({
-      next: (response) => {
-        this.products = response.data;
+            this._EcomdataService
+              .getSubCategories(categoryId)
+              .subscribe({
+                next: (response) => {
+                  this.product = response.data;
+                },
+              });
+        
       },
     });
   }
+
 
   addCart(id: string, element: HTMLButtonElement): void {
     this._Renderer2.setAttribute(element, 'disabled', 'true');
@@ -61,6 +64,7 @@ export class ProductsComponent implements OnInit {
   addFav(id: string): void {
     this._WhishlistService.addToWishList(id).subscribe({
       next: (response) => {
+        console.log(response);
         this._ToastrService.success(response.message);
         this.wishListData = response.data;
       },
@@ -70,6 +74,7 @@ export class ProductsComponent implements OnInit {
   removeFav(id: string): void {
     this._WhishlistService.removeFromWishList(id).subscribe({
       next: (response) => {
+        console.log(response);
         this._ToastrService.success(response.message);
         this.wishListData = response.data;
       },

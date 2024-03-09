@@ -21,7 +21,6 @@ export class DetailsComponent implements OnInit {
     private _Renderer2:Renderer2
   ) {}
 
-    product: any
 
   detailsSlider: OwlOptions = {
     loop: true,
@@ -40,18 +39,12 @@ export class DetailsComponent implements OnInit {
     this._ActivatedRoute.paramMap.subscribe({
       next: (params) => {
         let idProduct: any = params.get('id');
-
         this._EcomdataService.getProductDetails(idProduct).subscribe({
           next: (response) => {
             this.productDetails = response.data;
           },
         });
       },
-
-      error: (err) => {
-        console.log(err);
-      
-      }
     });
   }
 
