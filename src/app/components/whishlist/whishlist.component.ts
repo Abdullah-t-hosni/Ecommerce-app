@@ -1,10 +1,8 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Product } from 'src/app/Shared/interfaces/product';
 import { WhishlistService } from 'src/app/Shared/services/whishlist.service';
-import { RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CartService } from 'src/app/Shared/services/cart.service';
-import { EcomdataService } from 'src/app/Shared/services/ecomdata.service';
 
 @Component({
   selector: 'app-whishlist',
@@ -12,28 +10,28 @@ import { EcomdataService } from 'src/app/Shared/services/ecomdata.service';
   styleUrls: ['./whishlist.component.css'],
 })
 export class WhishlistComponent implements OnInit {
-  listDetails: any = {};
-  products: Product[] = [];
-  wishListData: string[] = [];
+  products: Product[] =  [];
+  wishListData: null | string[] = [];
 
   constructor(
     private _WhishlistService: WhishlistService,
     private _ToastrService: ToastrService,
     private _CartService: CartService,
-    private _EcomdataService: EcomdataService,
     private _Renderer2: Renderer2
   ) {}
 
   ngOnInit(): void {
+    this.getWish()
+  }
+
+  getWish(){
     this._WhishlistService.getWishList().subscribe({
       next: (response) => {
         this.products = response.data;
-        const newData = response.data.map((item: any) => item._id);
+        let newData = response.data.map((item: any) => item._id);
         this.wishListData = newData;
       },
-      error: (err) => {
-        console.log(err);
-      },
+
     });
   }
 
@@ -54,7 +52,6 @@ export class WhishlistComponent implements OnInit {
   addFav(id: string): void {
     this._WhishlistService.addToWishList(id).subscribe({
       next: (response) => {
-        console.log(response);
 
         this._ToastrService.success(response.message);
         this.wishListData = response.data;
@@ -65,12 +62,11 @@ export class WhishlistComponent implements OnInit {
   removeFav(id: string): void {
     this._WhishlistService.removeFromWishList(id).subscribe({
       next: (response) => {
-        console.log(response);
         this._ToastrService.success(response.message);
         this.wishListData = response.data;
 
         const newList = this.products.filter((item) =>
-          this.wishListData.includes(item._id)
+          this.wishListData?.includes(item._id)
         );
         this.products = newList;
       },

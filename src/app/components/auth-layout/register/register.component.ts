@@ -63,7 +63,6 @@ export class RegisterComponent {
         next: (response) => {
           if (response.message == 'success') {
             this.isLoading = false;
-            this._Router.navigate(['/login']);
           }
         },
         error: (err: HttpErrorResponse) => {

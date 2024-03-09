@@ -7,7 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class CartService {
 
-  headers: any = { token: localStorage.getItem('eToken'),};
+  myToken: any = { token: localStorage.getItem('eToken'),};
 
   numOfCartItems: BehaviorSubject<number> = new BehaviorSubject(0);
   cartId: BehaviorSubject<string> = new BehaviorSubject('');
@@ -15,7 +15,6 @@ export class CartService {
   constructor(private _HttpClient: HttpClient) {
     this.getUserCart().subscribe({
       next: (response) => {
-        console.log(response);
         this.numOfCartItems.next(response.numOfCartItems);
         this.cartId.next(response.data._id);
       },
@@ -39,8 +38,6 @@ export class CartService {
   removeItem(productId: string): Observable<any> {
     return this._HttpClient.delete(
       `https://ecommerce.routemisr.com/api/v1/cart/${productId}`,
-
-      
     );}
 
   updateCartQuantity(productId: string, count: number): Observable<any> {
@@ -58,8 +55,12 @@ export class CartService {
   }
 
 
-  removeCart(): Observable<any> {
+  clearCart(): Observable<any> {
     return this._HttpClient.delete(
       `https://ecommerce.routemisr.com/api/v1/cart`,
+      {
+        headers: this.myToken,
+      }
+
     );}
 }
