@@ -20,7 +20,6 @@ import { SubcategoriesComponent } from './components/categories/subcategories/su
 
 const routes: Routes =  [
 
-  { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: '',
   canActivate: [authGuard],
   component: BlankLayoutComponent, children: [
