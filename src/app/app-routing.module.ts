@@ -31,11 +31,10 @@ const routes: Routes =  [
     {path:'categories',component: CategoriesComponent},
     {path:'details/:id',component: DetailsComponent},
     { path: 'cart', component: CartComponent},
-    {path: 'checkout/:cartId', component: CheckoutComponent, canActivate: [authGuard]},
-    {path: 'allorders', component: OrdersComponent, canActivate: [authGuard]},
-    {path: 'whishlist', component: WhishlistComponent, canActivate: [authGuard]},
-    {path: 'subcategories/:id', component: SubcategoriesComponent, canActivate: [authGuard]},
-
+    {path: 'checkout/:cartId', component: CheckoutComponent},
+    {path: 'allorders', component: OrdersComponent},
+    {path: 'whishlist', component: WhishlistComponent},
+    {path: 'subcategories/:id', component: SubcategoriesComponent},
   ]},
 
   {path:'',component: AuthLayoutComponent, children:
