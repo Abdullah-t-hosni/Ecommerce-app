@@ -18,41 +18,33 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { WhishlistComponent } from './components/whishlist/whishlist.component';
 import { SubcategoriesComponent } from './components/categories/subcategories/subcategories.component';
 
-const routes: Routes = [
+const routes: Routes =  [
 
- 
-  
-  {
-    
-    path: '',
-    canActivate: [authGuard],
-    component: BlankLayoutComponent,
-    children: [
-      { path: '', redirectTo: '/home', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent },
-      { path: 'products', component: ProductsComponent },
-      { path: 'brands', component: BrandsComponent },
-      { path: 'categories', component: CategoriesComponent },
-      { path: 'details/:id', component: DetailsComponent },
-      { path: 'cart', component: CartComponent },
-      { path: 'subcategories/:id', component: SubcategoriesComponent },
-      {path: 'checkout/:cartId',component: CheckoutComponent,canActivate: [authGuard],},
-      { path: 'allorders',component: OrdersComponent,canActivate: [authGuard],},
-      {path: 'whishlist',component: WhishlistComponent,canActivate: [authGuard],},
+  { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: '',
+  canActivate: [authGuard],
+  component: BlankLayoutComponent, children: [
+    {path:'',redirectTo:'home',pathMatch:'full'},
+    {path:'home',component: HomeComponent},
+    {path:'products',component: ProductsComponent},
+    {path:'brands',component: BrandsComponent},
+    {path:'categories',component: CategoriesComponent},
+    {path:'details/:id',component: DetailsComponent},
+    { path: 'cart', component: CartComponent},
+    {path: 'checkout/:cartId', component: CheckoutComponent, canActivate: [authGuard]},
+    {path: 'allorders', component: OrdersComponent, canActivate: [authGuard]},
+    {path: 'whishlist', component: WhishlistComponent, canActivate: [authGuard]},
+    {path: 'subcategories/:id', component: SubcategoriesComponent, canActivate: [authGuard]},
 
-      
-      {
-        path: '',
-        component: AuthLayoutComponent,
-        children: [
-          { path: 'login', component: LoginComponent },
-          { path: 'register', component: RegisterComponent },
-          { path: 'forgot-password', component: ForgotPasswordComponent },
-        ],
-      },
-    ],
-  },
-  { path: '**',   component: NotfoundComponent },
+  ]},
+
+  {path:'',component: AuthLayoutComponent, children:
+  [
+    {path:'login',component: LoginComponent},
+    {path:'register',component: RegisterComponent},
+    {path:'forgot-password',component: ForgotPasswordComponent},
+  ]},
+  { path: '**', component: NotfoundComponent},
 ];
 
 @NgModule({
