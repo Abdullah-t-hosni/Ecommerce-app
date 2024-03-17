@@ -199,6 +199,14 @@ iframe {
   padding-bottom: 54px;
 }
 
+.login-content h2{
+	margin: 15px 0;
+	color: #333;
+	text-transform: uppercase;
+	font-size: 2.9rem;
+  text-align: center;
+}
+
 
 /*---------------------------------------------*/
 .wrap-input100 {
