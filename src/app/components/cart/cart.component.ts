@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { CartService } from 'src/app/Shared/services/cart.service';
 import { Product } from 'src/app/Shared/interfaces/product';
 
@@ -9,7 +9,9 @@ import { Product } from 'src/app/Shared/interfaces/product';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  cartDetails: any = null;
+  cartDetails:any;
+
+
   product: Product[] = [];
 
   constructor(private _CartService: CartService, private _Router: Router) {}
@@ -19,7 +21,7 @@ export class CartComponent implements OnInit {
       next: (response) => {
         this.cartDetails = response.data;
       },
-   
+
     });
   }
 
@@ -28,7 +30,7 @@ export class CartComponent implements OnInit {
       next: (response) => {
         this.cartDetails = response.data;
       },
-   
+
     });
   }
 
@@ -49,8 +51,10 @@ export class CartComponent implements OnInit {
     this._CartService.clearCart().subscribe({
       next: (response) => {
         if (response.message === 'success') {
-          this.cartDetails = null;
+          this.cartDetails =  null;
         }
+
+
       },
 
     });

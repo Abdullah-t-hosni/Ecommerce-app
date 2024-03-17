@@ -15,6 +15,8 @@ import { AuthService } from 'src/app/Shared/services/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+
+
   constructor(
     private _AuthService: AuthService,
     private _Router: Router,
@@ -61,4 +63,8 @@ export class LoginComponent {
       });
     }
   }
+
+
+  
 }
+

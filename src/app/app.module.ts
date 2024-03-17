@@ -36,7 +36,7 @@ import { HttpInterceptorInterceptor } from './interceptors/http.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { WhishlistComponent } from './components/whishlist/whishlist.component';
-import { SubcategoriesComponent } from './components/categories/subcategories/subcategories.component';
+import { EyelookComponent } from './components/eyelook/eyelook.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +66,7 @@ import { SubcategoriesComponent } from './components/categories/subcategories/su
     CheckoutComponent,
     OrdersComponent,
     WhishlistComponent,
-    SubcategoriesComponent,
+    EyelookComponent,
   ],
 
   imports: [

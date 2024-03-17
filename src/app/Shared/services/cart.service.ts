@@ -9,13 +9,17 @@ export class CartService {
 
   myToken: any = { token: localStorage.getItem('eToken'),};
 
-  numOfCartItems: BehaviorSubject<number> = new BehaviorSubject(0);
+  totalCartItems: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   cartId: BehaviorSubject<string> = new BehaviorSubject('');
 
+  changeCartCount: Observable<number> = this.totalCartItems.asObservable();
+  updateCartCount(newNumber: number): void {
+    this.totalCartItems.next(newNumber);
+  }
   constructor(private _HttpClient: HttpClient) {
     this.getUserCart().subscribe({
       next: (response) => {
-        this.numOfCartItems.next(response.numOfCartItems);
+        this.totalCartItems.next(response.numOfCartItems);
         this.cartId.next(response.data._id);
       },
     });
@@ -49,7 +53,7 @@ export class CartService {
 
   generateOnlinePayment(cartId: string, shippingAddress: any): Observable<any> {
     return this._HttpClient.post(
-      `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=https://ecommerce-app-psi-coral.vercel.app`,
+      `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=http://localhost:4200`,
       { shippingAddress: shippingAddress },
     );
   }

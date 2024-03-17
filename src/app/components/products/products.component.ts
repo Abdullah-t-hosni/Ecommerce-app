@@ -3,7 +3,7 @@ import { CartService } from 'src/app/Shared/services/cart.service';
 import { EcomdataService } from 'src/app/Shared/services/ecomdata.service';
 import { Product } from 'src/app/Shared/interfaces/product';
 import { ToastrService } from 'ngx-toastr';
-import { WhishlistService } from 'src/app/Shared/services/whishlist.service';
+import { WishListService } from '../core/services/wish-list.service';
 
 @Component({
   selector: 'app-products',
@@ -11,6 +11,7 @@ import { WhishlistService } from 'src/app/Shared/services/whishlist.service';
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
+
   products: Product[] = [];
   searchTerm: string = '';
   wishListData: string[] = [];
@@ -20,14 +21,13 @@ export class ProductsComponent implements OnInit {
     private _ToastrService: ToastrService,
     private _CartService: CartService,
     private _Renderer2: Renderer2,
-    private _WhishlistService: WhishlistService
-  ) {}
+    private _WishListService: WishListService  ) {}
 
   ngOnInit(): void {
     //get All Products..
     this.getAllProducts();
 
-    this._WhishlistService.getWishList().subscribe({
+    this._WishListService.userWishList.subscribe({
       next: (response) => {
         const newData = response.data.map((item: any) => item._id)
         this.wishListData = newData
@@ -49,7 +49,7 @@ export class ProductsComponent implements OnInit {
       next: (response) => {
         this._ToastrService.success(response.message);
         this._Renderer2.removeAttribute(element, 'disabled');
-        this._CartService.numOfCartItems.next(response.numOfCartItems);
+        this._CartService.totalCartItems.next(response.numOfCartItems);
       },
 
       error: (err) => {
@@ -59,7 +59,7 @@ export class ProductsComponent implements OnInit {
   }
 
   addFav(id: string): void {
-    this._WhishlistService.addToWishList(id).subscribe({
+    this._WishListService.addToWisthList(id).subscribe({
       next: (response) => {
         this._ToastrService.success(response.message);
         this.wishListData = response.data;
@@ -68,7 +68,8 @@ export class ProductsComponent implements OnInit {
   }
 
   removeFav(id: string): void {
-    this._WhishlistService.removeFromWishList(id).subscribe({
+
+    this._WishListService.RemoveProductFromWishList(id).subscribe({
       next: (response) => {
         this._ToastrService.success(response.message);
         this.wishListData = response.data;

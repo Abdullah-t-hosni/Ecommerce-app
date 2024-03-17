@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { EcomdataService } from 'src/app/Shared/services/ecomdata.service';
+import { BrandsService } from '../core/services/brands.service';
+import { Brands } from '../core/interfaces/brands';
 
 @Component({
   selector: 'app-brands',
@@ -7,24 +8,17 @@ import { EcomdataService } from 'src/app/Shared/services/ecomdata.service';
   styleUrls: ['./brands.component.css']
 })
 export class BrandsComponent implements OnInit {
-
-  constructor( private _EcomdataService:EcomdataService) { }
-
-  brands:any[]=[];
-
+  constructor(private _BrandsService:BrandsService) {}
+  allBrands!: Brands;
   ngOnInit(): void {
-    
-    this._EcomdataService.getBrands().subscribe({
-      next:(response)=>{
-        this.brands=response.data;
-        
-      },
-      error:(err)=>{
-        console.log(err)
-      }
-
-    })
-
+    this.getAllBrands();
   }
-
+  getAllBrands(): void {
+    this._BrandsService.getAllBrands().subscribe({
+      next: (response: Brands) => {
+        this.allBrands = response;
+      },
+    });
+  }
 }
+

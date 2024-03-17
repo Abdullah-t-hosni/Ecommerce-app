@@ -1,45 +1,69 @@
-<div class="py-5 text-center bg-main">
-
-    <h1>Orders</h1>
-
-    <div class="row g-5">
-        <div class="col-md-5 col-lg-4 order-md-last">
-            <h4 class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-muted">Your cart</span>
-                <span class="badge bg-secondary rounded-pill">3</span>
-            </h4>
-            <ul class="list-group mb-3 text-align-center ">
-                <li class="list-group-item d-flex justify-content-between lh-sm">
-                    <div>
-                        <h6 class="my-0">{{ cartDetails.name }}</h6>
-                    </div>
-                    <span class="text-muted">$12</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-sm">
-                    <div>
-                        <h6 class="my-0">Second product</h6>
-                        <small class="text-muted">Brief description</small>
-                    </div>
-                    <span class="text-muted">$8</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-sm">   
-                    <div>
-                        <h6 class="my-0">Third item</h6>
-                        <small class="text-muted">Brief description</small>
-                    </div>
-                    <span class="text-muted">$5</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between bg-light">
-                    <div class="text-success">
-                        <h6 class="my-0">Promo code</h6>
-                        <small>EXAMPLECODE</small>
-                    </div>
-                    <span class="text-success">-$5</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between">
-                    <span>Total (USD)</span>
-                    <strong>$20</strong>
-                </li>
-            </ul>
+<section>
+  <ng-container *ngIf="allOrders">
+    <div class="container bg-main-light rounded-2 p-4 my-4">
+      <div class="row mb-2 pb-2 border-bottom border-3" *ngFor="let item of allOrders">
+        <div class="col-12 col-lg-3" height="200">
+          <div class="d-flex flex-column rounded-5 overflow-hidden p-4">
+            <div>
+              <img class="w-100" [src]="item.cartItems[0].product.imageCover" alt="">
+            </div>
+            <div class="d-flex pt-2">
+              <div *ngFor="let itemPerOrder of item.cartItems | slice:1:4">
+                <img class="w-100 h-100" [src]="itemPerOrder.product.imageCover" alt="">
+              </div>
+            </div>
+          </div>
         </div>
-</div>
+        <div class="col-12 col-lg-9 row py-3">
+          <div class="row">
+            <div class="col-12 col-md-6 mb-2">
+              <p [style]="'color:var(--main-color);'"><span class="fw-bold">Order Id:</span> {{item.id}}</p>
+              <p class=" mb-0"><span class="fw-bold">order date:</span> {{item.createdAt | date :'medium'}}
+              </p>
+              <p class=" mb-0"><span >paid date:</span>{{item.paidAt | date :'medium'}}</p>
+              <p class="mb-0"><span class="fw-bold">payment Method: </span>{{item.paymentMethodType}}</p>
+              <p class="mb-0"><span class="fw-bold">shipping city:</span> {{item.shippingAddress.city}}</p>
+              <p class="mb-0"><span class="fw-bold">shipping Address:</span>{{item.shippingAddress.details}}</p>
+              <p class="mb-0"><span class="fw-bold">Phone:</span>{{item.shippingAddress.phone}}</p>
+            </div>
+            <hr class="d-block d-md-none border-2" />
+            <div class="col-12 col-md-6 mb-2 border rounded-3 p-2 my-2">
+              <div class="mb-2 pb-2 border-bottom border-3 text-center text-uppercase">
+                <p class="d-flex justify-content-between"><span class="fw-bold me-3">shipping Price:
+                  </span><span>{{item.shippingPrice +80 | currency:'EGP '}}</span></p>
+                <p class="d-flex justify-content-between"><span class="fw-bold me-3">Tax Price:</span>
+                  <span>{{0.14 * item.totalOrderPrice
+                    | currency:'EGP '}}</span>
+                </p>
+              </div>
+              <p class="d-flex justify-content-between"><span class="fw-bold me-3">Total Order Price:</span><span>
+                  {{item.totalOrderPrice * 1.14 + 80 | currency:'EGP '}}</span></p>
+            </div>
+          </div>
+          <div>
+            <div class="d-flex justify-content-between col-12 mb-2">
+              <div>
+                <h6>Order Delivered:
+                  <span class="text-success" *ngIf="item.isDelivered"><i class="fa-solid fa-truck"></i></span>
+                  <span class="text-danger" *ngIf="!item.isDelivered"><i class="fa-regular fa-circle-xmark"></i></span>
+                </h6>
+                <h6>Order Paid:
+                  <span class="text-success" *ngIf="item.isPaid"><i class="fa-solid fa-wallet"></i></span>
+                  <span class="text-danger" *ngIf="!item.isPaid"><i class="fa-regular fa-circle-xmark"></i></span>
+                </h6>
+                <p class="text-muted"><span class="fw-bold">order last update:</span> {{item.updatedAt | date
+                  :'medium'}}
+                </p>
+              </div>
+              <div>
+                <button [routerLink]="['/order',item._id]" class="btn text-decoration-underline">Order
+                  Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+</section>

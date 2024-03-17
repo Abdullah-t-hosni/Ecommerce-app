@@ -15,7 +15,7 @@ export class WhishlistService {
 
 
   constructor(private _HttpClient: HttpClient) {
-    
+
     this.getWishList().subscribe({
       next: (response) => {
         this.numOfWishItems.next(response.numOfWishItems);

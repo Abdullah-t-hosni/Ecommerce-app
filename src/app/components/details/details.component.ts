@@ -54,10 +54,10 @@ export class DetailsComponent implements OnInit {
     this._Renderer2.setAttribute(element, 'disabled', 'true');
     this._CartService.addToCart(id).subscribe({
       next: (response) => {
-       
+
         this._ToastrService.success(response.message);
         this._Renderer2.removeAttribute(element, 'disabled');
-        this._CartService.numOfCartItems.next(
+        this._CartService.totalCartItems.next(
           response.numOfCartItems
         )
       },
