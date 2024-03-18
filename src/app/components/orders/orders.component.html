@@ -20,7 +20,7 @@
               <p [style]="'color:var(--main-color);'"><span class="fw-bold">Order Id:</span> {{item.id}}</p>
               <p class=" mb-0"><span class="fw-bold">order date:</span> {{item.createdAt | date :'medium'}}
               </p>
-              <p class=" mb-0"><span >paid date:</span>{{item.paidAt | date :'medium'}}</p>
+              <p class=" mb-0"><span class="fw-bold">paid date:</span>{{item.paidAt | date :'medium'}}</p>
               <p class="mb-0"><span class="fw-bold">payment Method: </span>{{item.paymentMethodType}}</p>
               <p class="mb-0"><span class="fw-bold">shipping city:</span> {{item.shippingAddress.city}}</p>
               <p class="mb-0"><span class="fw-bold">shipping Address:</span>{{item.shippingAddress.details}}</p>

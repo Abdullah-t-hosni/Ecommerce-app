@@ -33,7 +33,6 @@ const routes: Routes = [
       { path: 'checkout/:cartId', component: CheckoutComponent },
       { path: 'allorders', component: OrdersComponent },
       { path: 'whishlist', component: WhishlistComponent },
-      // {path: 'specific-brand/:id',component: SpecificBrandComponent,},
     ],
   },
 

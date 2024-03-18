@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CartService } from 'src/app/Shared/services/cart.service';
 import { AllordersService } from '../core/services/allorders.service';
 import { Allorders } from 'src/app/Shared/interfaces/allorders';
 
