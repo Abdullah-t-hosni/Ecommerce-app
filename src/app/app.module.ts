@@ -38,6 +38,7 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { WhishlistComponent } from './components/whishlist/whishlist.component';
 import { EyelookComponent } from './components/eyelook/eyelook.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,6 +68,7 @@ import { EyelookComponent } from './components/eyelook/eyelook.component';
     OrdersComponent,
     WhishlistComponent,
     EyelookComponent,
+
   ],
 
   imports: [
