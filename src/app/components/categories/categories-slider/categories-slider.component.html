@@ -1,13 +1,16 @@
-<section>
+<section class="pt-5 pb-4">
     <div class="container">
+      <div class="text-center">
+        <h2 class="h1 mb-5">Categories</h2>
+      </div>
       <div class="row">
           <owl-carousel-o [options]="categoriesSliderOption">
             <ng-container *ngFor="let item of category">
               <ng-template carouselSlide [id]="item._id">
-          <div>
+          <div class="px-3" [routerLink]="['/subcategory/'+ item._id]" class=" cursor-pointer">
               <!-- item -->
-            <img [src]="item.image" height="150" [alt]="item.slug" class="w-100 mb-3">
-            <h3 class="h6">{{item.name}}</h3>
+            <img [src]="item.image" height="130" [alt]="item.slug" class="w-100 mb-3">
+            <h3 class="font-sm">{{item.name}}</h3>
           </div>
               </ng-template>
             </ng-container>
@@ -15,3 +18,4 @@
       </div>
     </div>
   </section>
+

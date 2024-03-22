@@ -38,6 +38,14 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { WhishlistComponent } from './components/whishlist/whishlist.component';
 import { SubbrandComponent } from './components/brands/subbrand/subbrand.component';
 import { SubcategoryComponent } from './components/categories/subcategory/subcategory.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,6 +76,7 @@ import { SubcategoryComponent } from './components/categories/subcategory/subcat
     WhishlistComponent,
     SubbrandComponent,
     SubcategoryComponent,
+    NavigationComponent,
   ],
 
   imports: [
@@ -81,6 +90,13 @@ import { SubcategoryComponent } from './components/categories/subcategory/subcat
     ToastrModule.forRoot(),
     RxReactiveFormsModule,
     NgxSpinnerModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatSlideToggleModule
+
   ],
   providers: [
     {
@@ -88,7 +104,10 @@ import { SubcategoryComponent } from './components/categories/subcategory/subcat
       useClass: HttpInterceptorInterceptor,
       multi: true,
     },
-    {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true}
+    {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true},
+
+
+
   ],
   bootstrap: [AppComponent],
 })

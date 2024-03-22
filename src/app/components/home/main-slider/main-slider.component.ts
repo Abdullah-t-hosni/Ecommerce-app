@@ -23,5 +23,5 @@ export class MainSliderComponent {
     items: 1,
     nav: true
   }
- 
+
 }

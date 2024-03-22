@@ -163,94 +163,78 @@
   </ng-container>
 </section> -->
 
-<section>
+<section class="my-5">
   <div class="container">
     <div class="row">
       <div class="col-12">
         <div class="d-flex justify-content-between align-items-center">
-          <h2>{{ categoryDetails.name }}</h2>
+          <h2 class="mb-0">{{ categoryDetails.name }}</h2>
           <div class="d-flex align-items-center">
-            <span class="mx-2 text-muted">Showing {{ categoryProducts.length }} results for </span>
-           
+            <span class="text-muted me-2">Showing {{ categoryProducts.length }} results for</span>
+            <ng-container *ngIf="searchTitle">
+              <span class="text-decoration-underline">"{{ searchTitle }}"</span>
+            </ng-container>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mt-5">
-      <div
-        *ngFor="let item of categoryProducts | search : searchTitle; index as i"
-        class="col p-4 position-relative parent overflow-hidden"
-      >
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mt-5 g-4">
+      <ng-container *ngFor="let item of categoryProducts | search : searchTitle; index as i">
         <div
+          class="col p-0 position-relative parent overflow-hidden"
           [routerLink]="['/details', item._id]"
-          class="product p-3 child cursor-pointer"
         >
-          <div class="">
-            <div class="position-relative overflow-hidden">
-              <img
-                class="w-100 rounded-3"
-                [src]="item.imageCover"
-                [alt]="item.category.name"
-              />
-            </div>
-            <hr />
-            <div class="d-flex flex-column">
-              <div>
-                <p class="fw-bold h5">{{ item.title }}</p>
-                <h2 [style]="'color:var(--main-color);'" class="fw-bolder h6">
-                  {{ item.slug }}
-                </h2>
+          <div class="product p-2 px-3 d-flex flex-column justify-content-between child cursor-pointer">
+            <div class="">
+              <div class="position-relative overflow-hidden">
+                <img
+                  class="w-100 rounded-3"
+                  [src]="item.imageCover"
+                  [alt]="item.category.name"
+                />
               </div>
-              <div>
-                <p class="mb-0 text-decoration-line-through text-danger fs-8">
-                  EGP
-                  {{ item.price }}
-                </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <p
-                    class="mb-0 d-flex justify-content-start align-items-center"
-                  >
-                    <span
-                      class="h6 fw-bolder d-flex justify-content-center align-items-center mb-0"
-                    >
-                      <span class="me-1">EGP</span>
-                      <span>{{
-                        item.price +
-                          item.price * (getOffer(i, categoryProducts) / 100)
-                          | number
-                      }}</span>
-                    </span>
+              <hr />
+              <div class="d-flex flex-column">
+                <div>
+                  <p class="fw-bold h5 mb-0">{{ item.title }}</p>
+                  <h2 class="fw-bolder h6 mb-0" [style]="'color:var(--main-color);'">
+                    {{ item.slug }}
+                  </h2>
+                </div>
+                <div>
+                  <p class="text-decoration-line-through text-danger fs-8 mb-0">
+                    EGP {{ item.price }}
                   </p>
-                  <div class="d-flex justify-content-end align-items-center">
-                    <i [style]="'color:yellow;'" class="fas fa-star"></i>
-                    {{ item.ratingsAverage }}
+                  <div class="d-flex justify-content-between align-items-center">
+                    <p class="mb-0 d-flex align-items-center">
+                      <span
+                        class="h6 fw-bolder d-flex align-items-center mb-0"
+                      >
+                        <span class="me-1">EGP</span>
+                        <span>{{
+                          item.price +
+                            item.price * (getOffer(i, categoryProducts) / 100)
+                            | number
+                        }}</span>
+                      </span>
+                    </p>
+                    <div class="d-flex align-items-center">
+                      <i class="fa-regular fa-heart text-yellow me-2" [ngClass]="currentWishList.includes($any(item._id)) ? 'text-main' : ''"></i>
+                      {{ item.ratingsAverage }}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="row my-2 p-3">
-          <button
-            (click)="addCart(item._id, btnAdd)"
-            #btnAdd
-            class="btn-main w-100 mx-auto rounded-3 p-0"
-          >
-            Add To Cart
-          </button>
-          <div class="px-2 col-3">
-            <button
-              *ngIf="!currentWishList.includes($any(item._id))"
-              (click)="addToWishList(item._id)"
-              class="wishListBtn btn-main w-100 h-100 d-flex justify-content-center align-items-center"
-            >
-              <i class="fa-regular fa-heart fa-lg"></i>
-            </button>
+      </ng-container>
 
-            <button
-              *ngIf="currentWishList.includes($any(item._id))"
-              (click)="removeFromWishList(item._id)"
-              class="wishListBtn btn-danger btn w-100 h-100 d-flex justify-content-center align-items-center"
-            >
+
+
+    </div>
+
+  </div>
+</section>
 
