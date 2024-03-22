@@ -5,7 +5,7 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mt-5">
         <div *ngFor="let item of AllCategories ; let i = index" class="col p-4 position-relative parent overflow-hidden">
           <div [routerLink]="['/subcategory/'+ item._id]" class="product p-3 child cursor-pointer">
-            <div class="">
+            <div>
               <div class="position-relative overflow-hidden">
                 <img class="w-100 rounded-3"  height="300" [src]="item.image" [alt]="item.name">
               </div>

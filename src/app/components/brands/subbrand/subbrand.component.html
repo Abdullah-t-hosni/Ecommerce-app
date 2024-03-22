@@ -19,7 +19,7 @@
         </div>
         <div class="container">
           <ng-container *ngIf="categoryProducts">
-            <div class="d-flex  mt-md-5">
+            <div class="d-flex justify-content-between mt-md-5">
               <div class="d-flex align-items-center">
                 <button
                   (click)="openSearchResult()"
@@ -110,33 +110,13 @@
                         class="position-absolute top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center overflow-hidden sliderParent"
                       >
                         <img
-                          class="w-100 h-100"
+                          class="w-100"
                           [src]="
                             item.images[2] ? item.images[2] : item.images[0]
                           "
                           [alt]="item.category.name"
                         />
-                        <img
-                          class="w-100 h-100"
-                          [src]="
-                            item.images[0] ? item.images[0] : item.images[0]
-                          "
-                          [alt]="item.category.name"
-                        />
-                        <img
-                          class="w-100 h-100"
-                          [src]="
-                            item.images[1] ? item.images[1] : item.images[0]
-                          "
-                          [alt]="item.category.name"
-                        />
-                        <img
-                          class="w-100 h-100"
-                          [src]="
-                            item.images[3] ? item.images[3] : item.images[0]
-                          "
-                          [alt]="item.category.name"
-                        />
+
                       </div>
                     </div>
                     <div class="col-8">
