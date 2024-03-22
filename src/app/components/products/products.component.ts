@@ -4,6 +4,7 @@ import { EcomdataService } from 'src/app/Shared/services/ecomdata.service';
 import { Product } from 'src/app/Shared/interfaces/product';
 import { ToastrService } from 'ngx-toastr';
 import { WishListService } from '../core/services/wish-list.service';
+import { AllordersService } from '../core/services/allorders.service';
 
 @Component({
   selector: 'app-products',
@@ -21,7 +22,9 @@ export class ProductsComponent implements OnInit {
     private _ToastrService: ToastrService,
     private _CartService: CartService,
     private _Renderer2: Renderer2,
-    private _WishListService: WishListService  ) {}
+    private _WishListService: WishListService,
+    private _AllordersService: AllordersService
+    ) {}
 
   ngOnInit(): void {
     //get All Products..

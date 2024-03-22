@@ -1,8 +1,8 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Allproducts } from './../../core/interfaces/allproducts';
+import { Component, OnInit } from '@angular/core';
+import { BrandsService } from '../../core/services/brands.service';
+import { SpecificBrand } from 'src/app/Shared/interfaces/specific-brand';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Specificcategorie } from '../../core/interfaces/specificcategorie';
-import { Allproducts } from '../../core/interfaces/allproducts';
-import { CategorisService } from '../../core/services/categoris.service';
 import { OffersService } from '../../core/services/offers.service';
 import { SharedProductsService } from '../../core/services/shared-products.service';
 import { CartService } from '../../core/services/cart.service';
@@ -10,17 +10,16 @@ import { GetHomeproductsService } from '../../core/services/get-homeproducts.ser
 import { ToastrService } from 'ngx-toastr';
 import { WishListService } from '../../core/services/wish-list.service';
 import { Successadd } from '../../core/interfaces/successadd';
-import { EcomdataService } from 'src/app/Shared/services/ecomdata.service';
-
-
+import { Product } from 'src/app/Shared/interfaces/product';
 
 @Component({
-  selector: 'app-subcategories',
-  templateUrl: './subcategories.component.html',
-  styleUrls: ['./subcategories.component.css'],
+  selector: 'app-subbrand',
+  templateUrl: './subbrand.component.html',
+  styleUrls: ['./subbrand.component.css']
 })
-export class SpecificCategoryComponent implements OnInit {
-  categoryDetails!: Specificcategorie;
+export class SubbrandComponent  {
+  products: Product[] = [];
+  brandDetails!: SpecificBrand;
   categoryProducts!: Allproducts[];
 
   changeDisplay: boolean = true;
@@ -28,18 +27,18 @@ export class SpecificCategoryComponent implements OnInit {
   dataindex: number = 1;
   productsLoaded: boolean = true;
   searchArray: Allproducts[] = [];
+  BrandId!: string | null;
   currentWishList: string[] = [''];
   constructor(
     private _ActivatedRoute: ActivatedRoute,
-    private _CategorisService: CategorisService,
+    private _BrandsService: BrandsService,
     private _OffersService: OffersService,
     private _SharedProductsService: SharedProductsService,
     private _Router: Router,
     private _CartService: CartService,
     private _GetHomeproductsService: GetHomeproductsService,
     private _ToastrService: ToastrService,
-    private _WishListService: WishListService,
-    private _EcomdataService:EcomdataService
+    private _WishListService: WishListService
   ) {}
 
   ngOnInit(): void {
@@ -47,21 +46,19 @@ export class SpecificCategoryComponent implements OnInit {
     this.getUserLogedWishList();
   }
 
-  categoryId!: string | null;
-
   getCategoryIDFromRoute(): void {
     this._ActivatedRoute.paramMap.subscribe({
       next: (response) => {
-        this.categoryId = response.get('id');
-        this.getSpecificCategory(this.categoryId);
+        this.BrandId = response.get('id');
+        this.getSpecificBrand(this.BrandId);
       },
     });
   }
 
-  getSpecificCategory(categoryId: string | null): void {
-    this._CategorisService.getSpecificCategory(categoryId).subscribe({
+  getSpecificBrand(BrandId: string | null): void {
+    this._BrandsService.getSpecificBrand(BrandId).subscribe({
       next: (response) => {
-        this.categoryDetails = response.data;
+        this.brandDetails = response.data;
         this.getCategoryProducts();
         this.productsLoaded = false;
       },
@@ -73,7 +70,7 @@ export class SpecificCategoryComponent implements OnInit {
         let Allproducts: Allproducts[] = response.data;
         let categoryProducts: Allproducts[] = [];
         Allproducts.forEach((product) => {
-          if (product.category.name == this.categoryDetails.name) {
+          if (product.brand.name == this.brandDetails.name) {
             categoryProducts.push(product);
           }
         });
@@ -130,7 +127,6 @@ export class SpecificCategoryComponent implements OnInit {
   addToWishList(productId: string | null): void {
     this._WishListService.addToWisthList(productId).subscribe({
       next: (response) => {
-        console.log(response.data);
         this.currentWishList = response.data;
         this._WishListService.changeHeartCount(response.data.length);
         this._ToastrService.success(
@@ -167,7 +163,5 @@ export class SpecificCategoryComponent implements OnInit {
     setTimeout(() => {
       this.imageIsLoading = false;
     }, 1500);
-    console.log('Loaded Successfylly');
   }
 }
-

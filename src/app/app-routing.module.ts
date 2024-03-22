@@ -1,3 +1,4 @@
+
 import { ForgotPasswordComponent } from './components/auth-layout/forgot-password/forgot-password.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -16,6 +17,8 @@ import { authGuard } from './Shared/guards/auth.guard'
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { WhishlistComponent } from './components/whishlist/whishlist.component';
+import { SubbrandComponent } from './components/brands/subbrand/subbrand.component';
+import { SubcategoryComponent } from './components/categories/subcategory/subcategory.component';
 
 const routes: Routes = [
   {
@@ -33,6 +36,8 @@ const routes: Routes = [
       { path: 'checkout/:cartId', component: CheckoutComponent },
       { path: 'allorders', component: OrdersComponent },
       { path: 'whishlist', component: WhishlistComponent },
+      {path: 'specific-brand/:id', component: SubbrandComponent},
+      {path: 'subcategory/:id', component: SubcategoryComponent},
     ],
   },
 

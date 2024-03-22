@@ -3,10 +3,10 @@
       <div class="row">
           <owl-carousel-o [options]="categoriesSliderOption">
             <ng-container *ngFor="let item of category">
-              <ng-template carouselSlide [id]="item.id">
+              <ng-template carouselSlide [id]="item._id">
           <div>
               <!-- item -->
-            <img [src]="item.image" height="150" [alt]="item.title" class="w-100 mb-3">
+            <img [src]="item.image" height="150" [alt]="item.slug" class="w-100 mb-3">
             <h3 class="h6">{{item.name}}</h3>
           </div>
               </ng-template>

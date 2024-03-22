@@ -36,6 +36,16 @@ a:hover {
 }
 
 .product {
+
+  box-shadow: var(--shadow);
+  padding: 5px;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  transition: box-shadow 0.5s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   border-radius: 5px;
   border: solid 1px var(--main-color);
   transition: box-shadow 0.5s;
@@ -48,6 +58,7 @@ a:hover {
 }
 
 .product .btn-main {
+
   transform: translateY(150%);
   transition: transform 0.7s;
 }
@@ -76,6 +87,7 @@ a:hover {
   color: #fff;
   cursor: pointer;
   transition: background-color 0.5s;
+
 }
 .btn-main:disabled {
   cursor: not-allowed;
@@ -100,4 +112,3 @@ a:hover {
 ::-webkit-scrollbar-thumb {
   background: #11bd11;
 }
-

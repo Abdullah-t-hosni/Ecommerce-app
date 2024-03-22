@@ -36,9 +36,8 @@ import { HttpInterceptorInterceptor } from './interceptors/http.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { WhishlistComponent } from './components/whishlist/whishlist.component';
-import { EyelookComponent } from './components/eyelook/eyelook.component';
-
-
+import { SubbrandComponent } from './components/brands/subbrand/subbrand.component';
+import { SubcategoryComponent } from './components/categories/subcategory/subcategory.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,8 +66,8 @@ import { EyelookComponent } from './components/eyelook/eyelook.component';
     CheckoutComponent,
     OrdersComponent,
     WhishlistComponent,
-    EyelookComponent,
-
+    SubbrandComponent,
+    SubcategoryComponent,
   ],
 
   imports: [

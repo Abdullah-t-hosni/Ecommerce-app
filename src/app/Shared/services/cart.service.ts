@@ -42,6 +42,7 @@ export class CartService {
   removeItem(productId: string): Observable<any> {
     return this._HttpClient.delete(
       `https://ecommerce.routemisr.com/api/v1/cart/${productId}`,
+
     );}
 
   updateCartQuantity(productId: string, count: number): Observable<any> {

@@ -1,7 +1,9 @@
+import { AllordersService } from './../../Shared/services/allorders.service';
 import { Component, OnInit } from '@angular/core';
 import {  Router } from '@angular/router';
 import { CartService } from 'src/app/Shared/services/cart.service';
 import { Product } from 'src/app/Shared/interfaces/product';
+import { Allorders } from '../core/interfaces/allorders';
 
 @Component({
   selector: 'app-cart',
@@ -13,8 +15,11 @@ export class CartComponent implements OnInit {
 
 
   product: Product[] = [];
+  allOrders!: Allorders;
 
-  constructor(private _CartService: CartService, private _Router: Router) {}
+  constructor(private _CartService: CartService, private _Router: Router,
+
+    private _AllordersService: AllordersService) {}
 
   removeFromCart(id: string): void {
     this._CartService.removeItem(id).subscribe({

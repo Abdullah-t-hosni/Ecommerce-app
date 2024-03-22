@@ -159,7 +159,7 @@
             placeholder="Name"
           />
           <div
-        class="alert-validate validate-input"
+        class="alert-validate validate-input alert-danger"
         *ngIf="
           registerForm.get('name')?.errors && registerForm.get('name')?.touched
         "
@@ -191,7 +191,7 @@
             placeholder="Email"
           />
           <div
-          class="alert-validate validate-input alert alert-danger mx-auto text-center mt-1 p-0 w-25"
+          class="alert-validate validate-input alert-danger"
           *ngIf="
             registerForm.get('email')?.errors &&
             registerForm.get('email')?.touched
@@ -220,7 +220,7 @@
             placeholder="Password"
           />
           <div
-          class=" alert-validate validate-input alert alert-danger mx-auto text-center mt-1 p-0 w-25"
+          class="alert-validate validate-input alert-danger"
           *ngIf="
             registerForm.get('password')?.errors &&
             registerForm.get('password')?.touched
@@ -248,7 +248,7 @@
             placeholder="rePassword"
           />
           <div
-          class="alert-validate validate-input alert alert-danger mx-auto text-center mt-1 p-0 w-25"
+          class="alert-validate validate-input alert-danger"
           *ngIf="
             registerForm.get('rePassword')?.errors &&
             registerForm.get('rePassword')?.touched
@@ -275,7 +275,7 @@
             placeholder="phone"
           />
           <div
-          class="alert-validate validate-input alert alert-danger mx-auto text-center mt-1 p-0 w-25"
+          class="alert-validate validate-input alert-danger"
           *ngIf="
             registerForm.get('phone')?.errors &&
             registerForm.get('phone')?.touched

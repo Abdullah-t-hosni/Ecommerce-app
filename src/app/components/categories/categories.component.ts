@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./categories.component.css'],
 })
 export class CategoriesComponent implements OnInit {
-  categories: Categories[] = [];
+  AllCategories: Categories[] = [];
 
   constructor(private _EcomdataService: EcomdataService , private _ActivatedRoute:ActivatedRoute) {}
 
@@ -18,12 +18,12 @@ export class CategoriesComponent implements OnInit {
 
     this._EcomdataService.getCategories().subscribe({
       next: (response) => {
-        this.categories = response.data;
+        this.AllCategories = response.data;
       },
     });
-   
+
   }
 
   }
-    
-  
+
+

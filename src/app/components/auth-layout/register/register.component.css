@@ -186,7 +186,7 @@
   content: attr(data-validate);
   position: absolute;
   max-width: 70%;
-  border: 1px solid #c80000;
+  border: 1px solid #c80000 !important;
   border-radius: 13px;
   padding: 4px 25px 4px 10px;
   top: 50%;
@@ -198,7 +198,7 @@
   right: 8px;
   pointer-events: none;
   font-family: 'Poppins';
-  color: #c80000;
+  color: #c80000 !important;
   font-size: 13px;
   line-height: 1.4;
   text-align: left;
@@ -215,7 +215,7 @@
   font-family: 'FontAwesome', 'poppins';
   display: block;
   position: absolute;
-  color: #c80000;
+  color: #c80000 !important;
   font-size: 15px;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -321,7 +321,7 @@ form{
 	left: 10px;
 	top: 50%;
 	transform: translateY(-50%);
-	color: red;
+	color: red !important;
 	font-size: 18px;
 	transition: .3s;
 }

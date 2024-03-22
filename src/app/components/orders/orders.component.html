@@ -29,15 +29,19 @@
             <hr class="d-block d-md-none border-2" />
             <div class="col-12 col-md-6 mb-2 border rounded-3 p-2 my-2">
               <div class="mb-2 pb-2 border-bottom border-3 text-center text-uppercase">
+                <h6>Order Summary</h6>
+              </div>
+              <div>
+                <p class="d-flex justify-content-between"><span class="fw-bold me-3">Items Price:</span><span>{{item.totalOrderPrice | currency}}</span></p>
                 <p class="d-flex justify-content-between"><span class="fw-bold me-3">shipping Price:
-                  </span><span>{{item.shippingPrice +80 | currency:'EGP '}}</span></p>
+                  </span><span>{{item.shippingPrice +80 | currency}}</span></p>
                 <p class="d-flex justify-content-between"><span class="fw-bold me-3">Tax Price:</span>
-                  <span>{{0.14 * item.totalOrderPrice
-                    | currency:'EGP '}}</span>
+                  <span>{{0.14 * item.totalOrderPrice | currency}}</span>
                 </p>
               </div>
+              <hr />
               <p class="d-flex justify-content-between"><span class="fw-bold me-3">Total Order Price:</span><span>
-                  {{item.totalOrderPrice * 1.14 + 80 | currency:'EGP '}}</span></p>
+                  {{item.totalOrderPrice * 1.14 + 80 | currency}}</span></p>
             </div>
           </div>
           <div>

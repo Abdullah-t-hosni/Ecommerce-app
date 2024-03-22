@@ -26,10 +26,10 @@ export class AllordersService {
       `https://ecommerce.routemisr.com/api/v1/orders/user/${this._AuthService.UserData.id}`
     );
   }
-  getSingleOrderDetails(_id: string | null): Observable<any> {
+  getSingleOrderDetails(id: string | null): Observable<any> {
     return this._HttpClient.get(
-      `https://ecommerce.routemisr.com/api/v1/orders/${_id}`,
-      { headers: { token: this._CartService.myToken } }
+      `https://ecommerce.routemisr.com/api/v1/orders/${id}`,
+      { headers: { token: this._CartService.myToken} }
     );
   }
 }

@@ -20,10 +20,10 @@ export class CheckoutComponent {
 })
 
 constructor(private _CartService:CartService , private _activatedRoute:ActivatedRoute) {
-  // this._activatedRoute.paramMap.subscribe((response:any)=>{
-  // this.cartId = response.params.cartId
+  this._activatedRoute.paramMap.subscribe((response:any)=>{
+  this.cartId = response.params.cartId
 
-  // })
+  })
 
 this._CartService.cartId.subscribe(response =>{
   this.cartId = response
