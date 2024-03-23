@@ -1,83 +1,79 @@
-<section
-  class="w-75 mx-auto  p-3 rounded-3 my-5"
-  *ngIf="cartDetails; else msg"
+<section class="container-fluid py-3 my-5"
+*ngIf="cartDetails; else msg"
 >
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>Cart Details</h1>
-    <div>
-      <a routerLink="/home" class="btn btn-info mx-1">Continue Shopping</a>
-      <button (click)="clear()" class="btn btn-outline-danger ms-2">Clear Cart</button>
-    </div>
-  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <h1 class="text-center mb-4">Cart Details</h1>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <a routerLink="/home" class="btn btn-info">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left me-1" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M7.5 3.5a.5.5 0 0 1 .5.5v2.793l3.146-3.147a.5.5 0 1 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 1 1 .708-.708L7 6.793V4a.5.5 0 0 1 .5-.5z"/>
+                <path fill-rule="evenodd" d="M7.5 1a.5.5 0 0 1 .5.5v2.793l3.146-3.147a.5.5 0 1 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 1 1 .708-.708L7 4.793V1.5a.5.5 0 0 1 .5-.5z"/>
+              </svg>
+              Continue Shopping
+            </a>
 
-
-  <div class="d-flex justify-content-end align-items-center mb-5">
-    <h4 class="text-main">
-      Total Price: {{cartDetails.totalCartPrice | currency : "EUR"}}
-    </h4>
-  </div>
-
-
-
-  <div
-    class="row border-bottom pb-2"
-    *ngFor="let item of cartDetails.products | filterProducts"
-  >
-    <div
-      class="col-md-1 p-2 cursor-pointer"
-      [routerLink]="['/details', item.product._id]"
-    >
-      <img [src]="item.product.imageCover" class="w-100" [alt]="" />
-    </div>
-    <div class="col-md-11 mt-2">
-      <div class="d-flex justify-content-between align-items-center">
-        <div>
-          <h3 class="h6">{{ item.product.title | termtext : 5 }}</h3>
-          <p class="text-main m-0">
-            Total Price item : {{ (item.price * item.count) | currency : "EUR" }}
-          </p>
-        </div>
-        <div class="d-flex align-items-center">
-          <button
-            (click)="removeFromCart(item.product._id)"
-            class="button"
-          >
-            <svg viewBox="0 0 448 512" class="svgIcon">
-              <path
-                d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"
-              ></path>
-            </svg>
-          </button>
-
-          <div class="number-control text-center px-2 gap-1">
-            <div
-              (click)="changeCount(item.product._id, item.count - 1)"
-              class="number-left"
-            ></div>
-            <span class="mx-2">{{ item.count }}</span>
-            <div
-              (click)="changeCount(item.product._id, item.count + 1)"
-              class="number-right"
-            ></div>
+            <button (click)="clear()" class="btn btn-outline-danger ms-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash me-1" viewBox="0 0 16 16">
+                <path d="M5.5 1a.5.5 0 0 1 .5.5V3h4V1.5a.5.5 0 0 1 1 0V3h1a2 2 0 0 1 2 2v1H2V5a2 2 0 0 1 2-2h1V1.5a.5.5 0 0 1 .5-.5zM2 7v7a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H2z"/>
+                <path fill-rule="evenodd" d="M4.5 10.5a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5zm3 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5zm3 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5z"/>
+              </svg>
+              Clear Cart
+            </button>
+                      </div>
+          <div>
+            <h4 class="text-main">
+              Total Price: {{cartDetails.totalCartPrice | currency : "EUR"}}
+            </h4>
           </div>
         </div>
+
+        <div *ngIf="cartDetails.products.length > 0; else emptyCart">
+          <div class="list-group mb-4">
+            <div
+              class="list-group-item d-flex justify-content-between align-items-center"
+              *ngFor="let item of cartDetails.products | filterProducts"
+            >
+              <div class="d-flex align-items-center">
+                <img [src]="item.product.imageCover" class="img-fluid me-3" [alt]="item.product.title" style="max-width: 100px;" />
+                <div>
+                  <h5 class="mb-0">{{ item.product.title | termtext : 5 }}</h5>
+                  <p class="m-0">Price: {{ item.price | currency : "EUR" }}</p>
+                  <p class="m-0">Quantity: {{ item.count }}</p>
+
+                </div>
+              </div>
+
+              <div>
+                <button
+                  (click)="removeFromCart(item.product._id)"
+                  class="btn btn-danger me-2"
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button [routerLink]="['/checkout/', cartDetails._id]" class="btn btn-success">
+              Proceed to Checkout
+            </button>
+          </div>
+        </div>
+
+        <ng-template #emptyCart>
+          <p class="text-center">Your cart is empty.</p>
+        </ng-template>
       </div>
     </div>
   </div>
-
-
-
-  <button [routerLink]="['/checkout/', cartDetails._id]" class="Btn mt-1">
-    <a > Buy Now </a>
-    <svg class="svgIcon" viewBox="0 0 576 512">
-      <path
-        d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z"
-      ></path>
-    </svg>
-  </button>
-
-
 </section>
+
+
+
 
 <ng-template #msg>
   <h2 class="text-center">Your Cart Is Empty...</h2>

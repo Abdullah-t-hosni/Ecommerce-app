@@ -192,5 +192,18 @@
   }
 
 
+.dropdown-item{
+  cursor: pointer;
+
+}
+.dropdown-item:hover{
+  background-color: var(--main-color);
+  color: white;
+
+}
+
+
+
+
 
 

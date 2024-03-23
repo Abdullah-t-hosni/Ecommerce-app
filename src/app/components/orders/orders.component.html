@@ -1,15 +1,15 @@
-<section>
+<section style="min-height: 80vh">
   <ng-container *ngIf="allOrders">
     <div class="container rounded-2 p-4 my-4">
       <div class="row mb-2 pb-2 border-bottom border-3" *ngFor="let item of allOrders">
-        <div class="col-12 col-lg-3" height="200">
+        <div class="col-12 col-lg-3">
           <div class="d-flex flex-column rounded-5 overflow-hidden p-4">
             <div>
               <img class="w-100" [src]="item.cartItems[0].product.imageCover" alt="">
             </div>
             <div class="d-flex pt-2">
               <div *ngFor="let itemPerOrder of item.cartItems | slice:1:4">
-                <img class="w-100 h-100" [src]="itemPerOrder.product.imageCover" alt="">
+                <img class="w-100 " [src]="itemPerOrder.product.imageCover" alt="">
               </div>
             </div>
           </div>
@@ -17,7 +17,7 @@
         <div class="col-12 col-lg-9 row py-3">
           <div class="row">
             <div class="col-12 col-md-6 mb-2">
-              <p [style]="'color:var(--main-color);'"><span class="fw-bold">Order Id:</span> {{item.id}}</p>
+              <p style="color:var(--main-color);"><span class="fw-bold">Order Id:</span> {{item.id}}</p>
               <p class=" mb-0"><span class="fw-bold">order date:</span> {{item.createdAt | date :'medium'}}
               </p>
               <p class=" mb-0"><span class="fw-bold">paid date:</span>{{item.paidAt | date :'medium'}}</p>
@@ -49,25 +49,23 @@
               <div>
                 <h6>Order Delivered:
                   <span class="text-success" *ngIf="item.isDelivered"><i class="fa-solid fa-truck"></i></span>
-                  <span class="text-danger" *ngIf="!item.isDelivered"><i class="fa-regular fa-circle-xmark"></i></span>
+                  <span class="text-danger" *ngIf="!item.isDelivered"><i class="fa-regular fa-circle
+                    "></i></span>
                 </h6>
                 <h6>Order Paid:
                   <span class="text-success" *ngIf="item.isPaid"><i class="fa-solid fa-wallet"></i></span>
                   <span class="text-danger" *ngIf="!item.isPaid"><i class="fa-regular fa-circle-xmark"></i></span>
                 </h6>
-                <p class="text-muted"><span class="fw-bold">order last update:</span> {{item.updatedAt | date
-                  :'medium'}}
-                </p>
-              </div>
-              <div>
-                <button [routerLink]="['/order',item._id]" class="btn text-decoration-underline">Order
-                  Details</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </ng-container>
 
-</section>
+
+
+              </div>
+
+
+              </div>
+              </div>
+        </div>
+        </div>
+        </div>
+        </ng-container>
+        </section>

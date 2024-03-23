@@ -45,7 +45,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-
+import { SettingsComponent } from './components/settings/settings.component';
+import { AddressComponent } from './components/settings/address/address.component';
+import { PrivacySettingComponent } from './components/settings/privacy-setting/privacy-setting.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,6 +79,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     SubbrandComponent,
     SubcategoryComponent,
     NavigationComponent,
+    SettingsComponent,
+    AddressComponent,
+    PrivacySettingComponent,
   ],
 
   imports: [
