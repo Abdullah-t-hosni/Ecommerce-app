@@ -166,3 +166,5 @@ export class SubcategoryComponent implements OnInit{
     console.log('Loaded Successfylly');
   }
 }
+
+

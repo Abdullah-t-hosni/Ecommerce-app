@@ -1,5 +1,6 @@
 .product{
     position: relative;
+    grid-area:auto;
 }
 
 

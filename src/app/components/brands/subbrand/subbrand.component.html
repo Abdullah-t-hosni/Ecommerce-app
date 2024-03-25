@@ -1,4 +1,4 @@
-<section class="my-5">
+<!-- <section class="my-5">
   <ng-container *ngIf="brandDetails">
     <div class="container bg-main-light my-4 p-5 rounded-2">
       <div class="row g-0">
@@ -208,6 +208,80 @@
               </div>
             </div>
           </ng-container>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</section> -->
+
+<section class="my-5">
+  <ng-container *ngIf="brandDetails">
+    <div class="container bg-main-light my-4 p-5 rounded-2">
+      <div class="row g-0">
+        <div class="col-md-4 col-lg-3 text-center">
+          <img [src]="brandDetails.image" class="w-100 rounded-3" [alt]="brandDetails.name" />
+        </div>
+        <div class="col-md-8 col-lg-9">
+          <div class="d-flex flex-column h-100 justify-content-between p-3">
+            <div class="col">
+              <h2 class="h4 fw-bold">Brand Name:</h2>
+              <h3 class="h5 fw-bold text-main">{{ brandDetails.name }}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="d-flex align-items-center">
+            <button (click)="openSearchResult()" class="btn btn-outline-main me-2">
+              <i class="fas fa-search"></i>
+            </button>
+            <input
+              #search
+              (keyup.Enter)="openSearchResult()"
+              [(ngModel)]="searchTitle"
+              placeholder="Search products..."
+              type="search"
+              class="form-control me-2"
+            />
+          </div>
+          <!-- <div class="d-flex align-items-center">
+            <button (click)="toggleDisplayMode('grid')" [class.active]="displayMode === 'grid'" class="btn btn-outline-main me-2">
+              <i class="fas fa-th-large"></i>
+            </button>
+            <button (click)="toggleDisplayMode('list')" [class.active]="displayMode === 'list'" class="btn btn-outline-main">
+              <i class="fas fa-th-list"></i>
+            </button>
+          </div> -->
+        </div>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          <ng-container *ngIf="categoryProducts && categoryProducts.length > 0; else noProducts">
+            <div *ngFor="let product of categoryProducts | search : searchTitle" class="col">
+              <!-- Product Card -->
+              <div class="card h-100">
+                <!-- Product Image -->
+                <img [src]="product.images" class="card-img-top rounded-3" [alt]="product.title" />
+                <div class="card-body">
+                  <!-- Product Title -->
+                  <h5 class="card-title">{{ product.title }}</h5>
+                  <!-- Product Description -->
+                  <!-- <p class="card-text" *ngIf="displayMode === 'list'">{{ product.description }}</p> -->
+                  <!-- Product Price -->
+                  <p class="card-text fw-bold mb-1">{{ product.price | currency }}</p>
+                  <!-- Add to Cart Button -->
+                  <button (click)="addToCart(product.id)" class="btn btn-main">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <!-- No Products Found -->
+          <ng-template #noProducts>
+            <div class="col">
+              <div class="alert alert-danger" role="alert">
+                No products found.
+              </div>
+            </div>
+          </ng-template>
         </div>
       </div>
     </div>

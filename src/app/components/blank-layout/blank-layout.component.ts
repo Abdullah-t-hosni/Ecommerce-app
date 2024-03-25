@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-blank-layout',
@@ -8,8 +8,23 @@ import { Component } from '@angular/core';
 export class BlankLayoutComponent {
 
 
-  scrollToTop(): void {
-    scrollTo({ top: 0, behavior: 'smooth' });
+  isButtonVisible: boolean = false;
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const yOffset = window.pageYOffset || document.documentElement.scrollTop;
+    const showPosition = 200;
+
+    if (yOffset < showPosition) {
+      this.isButtonVisible = false;
+    } else {
+      this.isButtonVisible = true;
+    }
   }
+
+  scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
 
 }

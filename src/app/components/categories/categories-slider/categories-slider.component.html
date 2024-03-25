@@ -1,21 +1,20 @@
 <section class="pt-5 pb-4">
-    <div class="container">
-      <div class="text-center">
-        <h2 class="h1 mb-5">Categories</h2>
-      </div>
-      <div class="row">
-          <owl-carousel-o [options]="categoriesSliderOption">
-            <ng-container *ngFor="let item of category">
-              <ng-template carouselSlide [id]="item._id">
-          <div class="px-3" [routerLink]="['/subcategory/'+ item._id]" class=" cursor-pointer">
-              <!-- item -->
-            <img [src]="item.image" height="130" [alt]="item.slug" class="w-100 mb-3">
-            <h3 class="font-sm">{{item.name}}</h3>
-          </div>
-              </ng-template>
-            </ng-container>
-          </owl-carousel-o>
-      </div>
+  <div class="container">
+    <div class="text-center">
+      <h2 class="h1 mb-5">Categories</h2>
     </div>
-  </section>
-
+    <div class="row">
+      <owl-carousel-o [options]="categoriesSliderOption">
+        <ng-container *ngFor="let item of category">
+          <ng-template carouselSlide [id]="item._id">
+            <div class="px-3" [routerLink]="['/subcategory/'+ item._id]" class="cursor-pointer">
+              <!-- item -->
+              <img [src]="item.image"  [alt]="item.slug" class="w-100 mb-3" height="200" />
+              <h3 class="font-sm">{{item.name}}</h3>
+            </div>
+          </ng-template>
+        </ng-container>
+      </owl-carousel-o>
+    </div>
+  </div>
+</section>

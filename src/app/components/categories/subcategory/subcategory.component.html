@@ -1,169 +1,3 @@
-<section class="my-5">
-  <ng-container *ngIf="categoryDetails">
-      <div class="d-flex align-items-center justify-content-center mt-4 p-5 rounded-2">
-        <div class="col-md-2">
-          <div>
-            <img [src]="categoryDetails.image" class="w-100 rounded-3" [alt]="categoryDetails.name">
-          </div>
-        </div>
-        <div class="col-md-10">
-          <div>
-            <div class="d-flex flex-column justify-content-between">
-              <div class="my-3 my-md-0">
-                <h3 >{{categoryDetails.name}}</h3>
-                <h4 [style]="'color:var(--main-color);'">{{categoryDetails.slug}}</h4>
-              </div>
-              <div>
-                <p class="mb-1"><span class="fw-bold">Total Products: </span> {{categoryProducts.length}}</p>
-                <p class="mb-1"><span class="fw-bold">Last Update: </span> {{categoryDetails.updatedAt | date:'medium'}}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="container mb-3">
-        <ng-container *ngIf="categoryProducts">
-          <div class="d-flex justify-content-between mt-md-5">
-            <div class="d-flex align-items-center">
-              <button
-                (click)="openSearchResult()"
-                class="btn btn-outline-main"
-              >
-                <i class="fa-solid fa-magnifying-glass"></i>
-              </button>
-              <input
-                #search
-                (keyup.Enter)="openSearchResult()"
-                (input)="searchReasult(search.value)"
-                [(ngModel)]="searchTitle"
-                placeholder="search .. "
-                type="search"
-                class="form-control me-2 w-100"
-              />
-            </div>
-            <div class="d-none d-md-flex">
-              <button
-                (click)="changedisplayClicOne()"
-                [disabled]="changeDisplay"
-                class="btn btn-outline-main"
-              >
-              <i class="fa-solid fa-table-cells-large"></i>
-
-              </button>
-              <button
-                (click)="changedisplayClicTwo()"
-                [disabled]="!changeDisplay"
-                class="btn btn-outline-main"
-              >
-              <i class="fa-solid fa-list"></i>
-
-                            </button>
-            </div>
-          </div>
-          <div [ngClass]="{
-            'row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4':changeDisplay,
-            'row-cols-1':!changeDisplay
-            }" class="row mt-5">
-            <ng-container *ngIf="!(categoryProducts | search:searchTitle).length ">
-              <div class="alert alert-danger my-4">No products with that name sorry</div>
-            </ng-container>
-            <div *ngFor="let item of categoryProducts | search:searchTitle ; index as i"
-              class="col-12 p-4 shadow-sm position-relative parent overflow-hidden">
-
-
-              <div *ngIf="imageIsLoading" class="position-absolute w-100 h-100 top-0 start-0 end-0 bottom-0 z-3 ">
-                <div class="card w-100 border-0  p-3 d-flex justify-content-between flex-column"
-                  aria-hidden="true">
-                  <div style="aspect-ratio: 1/1;" class="bg-secondary card-img-top"></div>
-                  <div class="card-body">
-                    <h5 class="card-title placeholder-glow">
-                      <span class="placeholder col-6"></span>
-                    </h5>
-                    <p class="card-text placeholder-glow">
-                      <span class="placeholder col-7"></span>
-                      <span class="placeholder col-4"></span>
-                      <span class="placeholder col-4"></span>
-                      <span class="placeholder col-6"></span>
-                      <span class="placeholder col-8"></span>
-                    </p>
-                    <div class="d-flex justify-content-between">
-                      <a class="btn-main disabled placeholder col-6" aria-disabled="true"></a>
-                      <i class="fas fa-heart text-main fa-2x opacity-50"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div [routerLink]="['/details', item._id]" class="product cursor-pointer">
-                <div [ngClass]="{'row':!changeDisplay}">
-                  <div [ngClass]="{'col-3':!changeDisplay}" class="position-relative overflow-hidden">
-                    <img [style]="imageIsLoading?'aspect-ratio: 1/1;':''" (load)="imageLoaded()" class="w-100"
-                      [src]="item.imageCover" [alt]="item.category.name">
-                    <div
-                      class=" position-absolute top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center overflow-hidden sliderParent">
-                      <img class="w-100" [src]="item.images[2]?item.images[2]:item.images[0]"
-                        [alt]="item.category.name">
-                    </div>
-                  </div>
-                  <ng-container *ngIf="changeDisplay">
-                    <hr />
-                  </ng-container>
-
-                  <div [ngClass]="{'col-9 justify-content-between':!changeDisplay}" class="d-flex flex-column">
-                    <div>
-
-                      <ng-container *ngIf="!changeDisplay">
-                        <p class="text-main">{{item.description}}</p>
-                        <p><span class="fw-bold">reviews : </span>{{item.ratingsAverage}} <i
-                            class="fa-solid fa-eye"></i>
-                        </p>
-                      </ng-container>
-
-                      <h2 class="fw-bolder h6">
-                        {{item.title | termtext:changeDisplay ?2:20 }}
-                      </h2>
-                      <p class="text-main">{{item.category.name}}</p>
-                    </div>
-                    <div>
-
-                      <div class="d-flex justify-content-between align-items-center">
-                        <p class="mb-0 d-flex justify-content-start align-items-center">
-                          <span class="h6 fw-bolder d-flex justify-content-center align-items-center mb-0">
-                            {{item.price| currency}}
-                          </span>
-                        </p>
-                        <div class="d-flex justify-content-end align-items-center">
-                          <i [style]="'color:yellow;'" class="fas fa-star"></i>
-                          {{item.ratingsAverage}}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row my-2 p-3">
-                <div class="px-2 col-3 ">
-                  <button *ngIf="!currentWishList.includes($any(item._id))" (click)="addToWishList(item._id)"
-                    class="wishListBtn btn-main w-100 h-100 d-flex justify-content-center align-items-center "><i
-                      class="fa-regular fa-heart fa-lg"></i></button>
-
-                  <button *ngIf="currentWishList.includes($any(item._id))" (click)="removeFromWishList(item._id)"
-                    class="wishListBtn btn-danger btn w-100 h-100 d-flex justify-content-center align-items-center "><i
-                      class="fa-solid fa-heart fa-lg"></i></button>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </ng-container>
-
-      </div>
-
-
-  </ng-container>
-</section>
-
 <!-- <section class="my-5">
   <div class="container">
     <div class="row">
@@ -171,7 +5,9 @@
         <div class="d-flex justify-content-between align-items-center">
           <h2 class="mb-0">{{ categoryDetails.name }}</h2>
           <div class="d-flex align-items-center">
-            <span class="text-muted me-2">Showing {{ categoryProducts.length }} results </span>
+            <span class="text-muted me-2"
+              >Showing {{ categoryProducts.length }} results
+            </span>
             <ng-container *ngIf="searchTitle">
               <span class="text-decoration-underline">"{{ searchTitle }}"</span>
             </ng-container>
@@ -179,17 +15,23 @@
         </div>
       </div>
     </div>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mt-5 g-4">
-      <ng-container *ngFor="let item of categoryProducts | search : searchTitle; index as i">
+    <div
+      class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mt-5 g-4"
+    >
+      <ng-container
+        *ngFor="let item of categoryProducts | search : searchTitle; index as i"
+      >
         <div
           class="col p-0 position-relative parent overflow-hidden"
           [routerLink]="['/details', item._id]"
         >
-          <div class="product p-2 px-3 d-flex flex-column justify-content-between child cursor-pointer">
+          <div
+            class="product p-2 px-3 d-flex flex-column justify-content-between child cursor-pointer"
+          >
             <div class="">
               <div class="position-relative overflow-hidden">
                 <img
-                  class="w-100 "
+                  class="w-100"
                   [src]="item.imageCover"
                   [alt]="item.category.name"
                 />
@@ -198,24 +40,31 @@
               <div class="d-flex flex-column">
                 <div>
                   <p class="fw-bold h5 mb-0">{{ item.title }}</p>
-                  <h2 class="fw-bolder h6 mb-0" [style]="'color:var(--main-color);'">
+                  <h2
+                    class="fw-bolder h6 mb-0"
+                    [style]="'color:var(--main-color);'"
+                  >
                     {{ item.slug }}
                   </h2>
                 </div>
                 <div>
-
-                  <div class="d-flex justify-content-between align-items-center">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
                     <p class="mb-0 d-flex align-items-center">
-                      <span
-                        class="h6 fw-bolder d-flex align-items-center mb-0"
-                      >
-                        <span>{{
-                          item.price | currency
-                        }}</span>
+                      <span class="h6 fw-bolder d-flex align-items-center mb-0">
+                        <span>{{ item.price | currency }}</span>
                       </span>
                     </p>
                     <div class="d-flex align-items-center">
-                      <i class="fa-regular fa-heart text-yellow me-2" [ngClass]="currentWishList.includes($any(item._id)) ? 'text-main' : ''"></i>
+                      <i
+                        class="fa-regular fa-heart text-yellow me-2"
+                        [ngClass]="
+                          currentWishList.includes($any(item._id))
+                            ? 'text-main'
+                            : ''
+                        "
+                      ></i>
                       {{ item.ratingsAverage }}
                     </div>
                   </div>
@@ -225,11 +74,48 @@
           </div>
         </div>
       </ng-container>
-
-
-
     </div>
-
   </div>
 </section> -->
+
+
+<section class="my-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="mb-4">{{ categoryDetails.name }}</h2>
+        <p class="text-main fw-bold mb-4">
+          Showing {{ categoryProducts.length }} results
+          <ng-container *ngIf="searchTitle">
+            for "{{ searchTitle }}"
+          </ng-container>
+        </p>
+      </div>
+    </div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mt-4 g-4">
+      <ng-container *ngFor="let item of categoryProducts | search : searchTitle; index as i">
+        <div class="col mb-4">
+          <div class="product card child  cursor-pointer"
+            [routerLink]="['/details', item._id]"
+          >
+            <img class="card-img-top" [src]="item.imageCover" [alt]="item.category.name" />
+            <div class="card-body">
+              <h5 class="card-title">{{ item.title | termtext : 2  }}</h5>
+              <p class="card-text">{{ item.description | termtext : 4 }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <p class="mb-0">
+                  <span class="fw-bold">{{ item.price | currency }}</span>
+                </p>
+                <div class="d-flex align-items-center">
+                  <i class="fas fa-star rating-color"></i>
+                  <span>{{ item.ratingsAverage }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</section>
 

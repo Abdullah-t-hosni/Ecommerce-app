@@ -1,9 +1,11 @@
+import { Data } from './../../Shared/interfaces/single-order';
 import { AllordersService } from './../../Shared/services/allorders.service';
 import { Component, OnInit } from '@angular/core';
 import {  Router } from '@angular/router';
 import { CartService } from 'src/app/Shared/services/cart.service';
 import { Product } from 'src/app/Shared/interfaces/product';
 import { Allorders } from '../core/interfaces/allorders';
+import { Cart } from 'src/app/Shared/interfaces/cart';
 
 @Component({
   selector: 'app-cart',
@@ -11,7 +13,7 @@ import { Allorders } from '../core/interfaces/allorders';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  cartDetails:any;
+  cartDetails: any;
 
 
   product: Product[] = [];
