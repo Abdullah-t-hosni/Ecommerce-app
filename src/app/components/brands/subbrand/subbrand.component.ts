@@ -21,7 +21,7 @@ export class SubbrandComponent  {
   products: Product[] = [];
   brandDetails!: SpecificBrand;
   categoryProducts!: Allproducts[];
-
+  displayMode: 'grid' | 'list' = 'grid';
   changeDisplay: boolean = true;
   searchTitle: string = '';
   dataindex: number = 1;
@@ -40,6 +40,9 @@ export class SubbrandComponent  {
     private _ToastrService: ToastrService,
     private _WishListService: WishListService
   ) {}
+
+
+
 
   ngOnInit(): void {
     this.getCategoryIDFromRoute();
@@ -163,5 +166,9 @@ export class SubbrandComponent  {
     setTimeout(() => {
       this.imageIsLoading = false;
     }, 1500);
+  }
+
+  toggleDisplayMode(mode: 'grid' | 'list'): void {
+    this.displayMode = mode;
   }
 }
