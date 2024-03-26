@@ -218,13 +218,13 @@
   <ng-container *ngIf="brandDetails">
     <div class="container bg-main-light my-4 p-5 rounded-2">
       <div class="row g-0">
-        <div class="col-md-4 col-lg-3 text-center">
+        <div class="col-sm-9 col-md-2 col-lg-2 text-center">
           <img [src]="brandDetails.image" class="w-100 rounded-3" [alt]="brandDetails.name" />
         </div>
-        <div class="col-md-8 col-lg-9">
-          <div class="d-flex flex-column h-100 justify-content-between p-3">
-            <div class="col">
-              <h2 class="h4 fw-bold">Brand Name:</h2>
+        <div class="col-md-1 col-lg-1">
+          <div class="d-flex  justify-content-between p-3">
+            <div>
+              <h2 class="h6 fw-bold">Brand Name:</h2>
               <h3 class="h5 fw-bold text-main">{{ brandDetails.name }}</h3>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CartService } from 'src/app/Shared/services/cart.service';
 
@@ -13,7 +13,7 @@ export class CheckoutComponent {
   cartId:string=''
 
   shippingAddress: FormGroup = new FormGroup({
-    address: new FormControl(''),
+    address: new FormControl('' ) ,
     city: new FormControl(''),
     phone: new FormControl(''),
 
@@ -22,7 +22,6 @@ export class CheckoutComponent {
 constructor(private _CartService:CartService , private _activatedRoute:ActivatedRoute) {
   this._activatedRoute.paramMap.subscribe((response:any)=>{
   this.cartId = response.params.cartId
-
   })
 
 this._CartService.cartId.subscribe(response =>{
@@ -33,6 +32,9 @@ handleOnline(){
   this._CartService.generateOnlinePayment(this.cartId,this.shippingAddress.value).subscribe({
     next: (response) => {
       window.location.href = response.session.url
+
+
+
     },
 
   })

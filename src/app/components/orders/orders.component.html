@@ -41,7 +41,7 @@
               </p>
               <p class="mb-0">
                 <span class="fw-bold">payment Method: </span
-                >{{ item.paymentMethodType }}
+                >
               </p>
               <p class="mb-0">
                 <span class="fw-bold">shipping city:</span>
@@ -115,6 +115,49 @@
 </section> -->
 
 
+<!-- <section>
+  <ng-container *ngIf="allOrders">
+    <div class="container my-5">
+      <div *ngFor="let item of allOrders" class="card mb-4">
+        <div class="row g-0">
+          <div class="col-12 col-lg-3">
+            <div class="d-flex flex-column rounded-3 overflow-hidden p-3">
+              <div *ngFor="let itemPerOrder of item.cartItems.slice(0, 3)">
+                <img class="w-100 mb-2" [src]="itemPerOrder.product.imageCover" alt="Product Image" />
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-9">
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Order Details</h5>
+              <p class="card-text fw-bold ">Order Id: <span class="text-main">{{ item.id }}</span> </p>
+              <p class="card-text fw-bold  ">Order Date: <span class="text-main">{{ item.createdAt | date : "medium" }}</span> </p>
+              <p class="card-text fw-bold">Paid Date: <span class="text-main">{{ item.paidAt | date : "medium" }}</span> </p>
+              <p class="card-text fw-bold">Payment Method: <span class="text-main" >{{ item.paymentMethodType }}</span> </p>
+              <p class="card-text fw-bold ">Shipping City: <span class="text-main">{{ item.shippingAddress.city }}</span> </p>
+              <hr />
+              <div class="mb-3 pb-3 border-bottom">
+                <h6 class="text-uppercase">Order Summary</h6>
+                <p class="d-flex gap-4 fw-bold"> Items Price: <span class="text-main">{{ item.totalOrderPrice | currency }} </span> </p>
+                <p class="d-flex gap-4 fw-bold "> Shipping Price: <span class="text-main">{{ item.shippingPrice + 80 | currency }}</span></p>
+                <p class="d-flex gap-4 fw-bold"> Tax Price: <span class="text-main">{{ 0.14 * item.totalOrderPrice | currency }}</span></p>
+              </div>
+              <p class="d-flex gap-4 fw-bold ">Total Order Price: <span class="text-main">{{ (item.totalOrderPrice * 1.14) + 80 | currency }}</span></p>
+              <hr />
+              <div class="d-flex gap-4 ">
+                <div>
+                  <h6>Order Paid: <span class="text-success" *ngIf="item.isPaid"><i class="fa-solid fa-wallet"></i></span> <span class="text-danger" *ngIf="!item.isPaid"><i class="fa-regular fa-circle-xmark"></i></span></h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</section> -->
+
+
 <section>
   <ng-container *ngIf="allOrders">
     <div class="container my-5">
@@ -129,26 +172,23 @@
           </div>
           <div class="col-12 col-lg-9">
             <div class="card-body">
-              <h5 class="card-title">Order Details</h5>
-              <p class="card-text"><span class="fw-bold">Order Id:</span> {{ item.id }}</p>
-              <p class="card-text"><span class="fw-bold">Order Date:</span> {{ item.createdAt | date : "medium" }}</p>
-              <p class="card-text"><span class="fw-bold">Paid Date:</span> {{ item.paidAt | date : "medium" }}</p>
-              <p class="card-text"><span class="fw-bold">Payment Method:</span> {{ item.paymentMethodType }}</p>
-              <p class="card-text"><span class="fw-bold">Shipping City:</span> {{ item.shippingAddress.city }}</p>
-              <p class="card-text"><span class="fw-bold">Shipping Address:</span> {{ item.shippingAddress.details }}</p>
-              <p class="card-text"><span class="fw-bold">Phone:</span> {{ item.shippingAddress.phone }}</p>
+              <h5 class="card-title fw-bold">Order Details</h5>
+              <p class="card-text fw-bold ">Order Id: <span class="text-main">{{ item.id }}</span> </p>
+              <p class="card-text fw-bold  ">Order Date: <span class="text-main">{{ item.createdAt | date : "medium" }}</span> </p>
+              <p class="card-text fw-bold">Paid Date: <span class="text-main">{{ item.paidAt | date : "medium" }}</span> </p>
+              <p class="card-text fw-bold">Payment Method: <span class="text-main" >{{ item.paymentMethodType }}</span> </p>
+              <p class="card-text fw-bold ">Shipping City: <span class="text-main">{{ item.shippingAddress.city }}</span> </p>
               <hr />
               <div class="mb-3 pb-3 border-bottom">
                 <h6 class="text-uppercase">Order Summary</h6>
-                <p class="d-flex justify-content-between"><span class="fw-bold">Items Price:</span>{{ item.totalOrderPrice | currency }}</p>
-                <p class="d-flex justify-content-between"><span class="fw-bold">Shipping Price:</span>{{ item.shippingPrice + 80 | currency }}</p>
-                <p class="d-flex justify-content-between"><span class="fw-bold">Tax Price:</span>{{ 0.14 * item.totalOrderPrice | currency }}</p>
+                <p class="d-flex gap-4 fw-bold"> Items Price: <span class="text-main">{{ item.totalOrderPrice | currency }} </span> </p>
+                <p class="d-flex gap-4 fw-bold "> Shipping Price: <span class="text-main">{{ item.shippingPrice | currency }}</span></p>
+                <p class="d-flex gap-4 fw-bold"> Tax Price: <span class="text-main">{{ 0.14 * item.totalOrderPrice | currency }}</span></p>
               </div>
-              <p class="d-flex justify-content-between"><span class="fw-bold">Total Order Price:</span>{{ (item.totalOrderPrice * 1.14) + 80 | currency }}</p>
+              <p class="d-flex gap-4 fw-bold ">Total Order Price: <span class="text-main">{{ (item.totalOrderPrice * 1.14) + 80 | currency }}</span></p>
               <hr />
-              <div class="d-flex justify-content-between">
+              <div class="d-flex gap-4 ">
                 <div>
-                  <h6>Order Delivered: <span class="text-success" *ngIf="item.isDelivered"><i class="fa-solid fa-truck"></i></span> <span class="text-danger" *ngIf="!item.isDelivered"><i class="fa-regular fa-circle"></i></span></h6>
                   <h6>Order Paid: <span class="text-success" *ngIf="item.isPaid"><i class="fa-solid fa-wallet"></i></span> <span class="text-danger" *ngIf="!item.isPaid"><i class="fa-regular fa-circle-xmark"></i></span></h6>
                 </div>
               </div>
@@ -159,3 +199,4 @@
     </div>
   </ng-container>
 </section>
+
