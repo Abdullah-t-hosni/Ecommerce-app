@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/Shared/services/auth.service'
 import { BehaviorSubject, Observable } from 'rxjs';
-import { CartService } from './cart.service';
+import { CartService } from 'src/app/components/core/services/cart.service';
+
 
 @Injectable({
   providedIn: 'root',
@@ -23,13 +24,12 @@ export class AllordersService {
 
   getUserOrders(): Observable<any> {
     return this._HttpClient.get(
-      `https://ecommerce.routemisr.com/api/v1/orders/user/${this._AuthService.UserData.id}`
+      `https://ecommerce.routemisr.com/api/v1/orders/user/`
     );
   }
   getSingleOrderDetails(id: string | null): Observable<any> {
     return this._HttpClient.get(
       `https://ecommerce.routemisr.com/api/v1/orders/${id}`,
-      { headers: { token: this._CartService.myToken} }
     );
   }
 }
