@@ -54,28 +54,11 @@ export class CartService {
 
   generateOnlinePayment(cartId: string, shippingAddress: any): Observable<any> {
     return this._HttpClient.post(
-      `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=https://ecommerce-app-psi-coral.vercel.app`,
+      `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=https://ecommerce-app-psi-coral.vercel.app/`,
       { shippingAddress: shippingAddress },
     );
   }
 
-  checkOutSession(userCartId: string | null, userAddress: {}): Observable<any> {
-    return this._HttpClient.post(
-      `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${userCartId}?url=https://e-commerce-website-angular-tau.vercel.app/`,
-      { shippingAddress: userAddress },
-      { headers: { token: this.myToken } }
-    );
-  }
-  checkOutSessionCash(
-    userCartId: string | null,
-    userAddress: {}
-  ): Observable<any> {
-    return this._HttpClient.post(
-      `https://ecommerce.routemisr.com/api/v1/orders/${userCartId}`,
-      { shippingAddress: userAddress },
-      { headers: { token: this.myToken } }
-    );
-  }
   clearCart(): Observable<any> {
     return this._HttpClient.delete(
       `https://ecommerce.routemisr.com/api/v1/cart`,

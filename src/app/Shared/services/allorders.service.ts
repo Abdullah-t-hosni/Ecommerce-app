@@ -23,7 +23,7 @@ export class AllordersService {
 
   getUserOrders(): Observable<any> {
     return this._HttpClient.get(
-      `https://ecommerce.routemisr.com/api/v1/orders/user/${this._AuthService.UserData.id}`
+      `https://ecommerce.routemisr.com/api/v1/orders/user/`
     );
   }
   getSingleOrderDetails(id: string | null): Observable<any> {
