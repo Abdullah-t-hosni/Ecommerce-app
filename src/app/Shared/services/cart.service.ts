@@ -36,7 +36,7 @@ export class CartService {
   }
 
   getUserCart(): Observable<any> {
-    return this._HttpClient.get('https://ecommerce.routemisr.com/api/v1/cart', );
+    return this._HttpClient.get('https://ecommerce.routemisr.com/api/v1/cart');
   }
 
   removeItem(productId: string): Observable<any> {
