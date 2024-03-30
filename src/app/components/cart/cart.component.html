@@ -1,14 +1,10 @@
-
-
-<section class="container-fluid py-3 my-5" *ngIf="cartDetails; else msg">
+<section class="container-fluid py-3 my-5" *ngIf="cartDetails; else emptyCartSection">
   <div class="container">
     <div class="row">
       <div class="col-md-8 mx-auto">
         <h1 class="text-center mb-4">Cart Details</h1>
         <!-- Navigation buttons -->
         <div class="d-flex justify-content-between align-items-center mb-4">
-
-
           <div>
             <a routerLink="/home" class="btn btn-outline-success">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left me-1" viewBox="0 0 16 16">
@@ -18,48 +14,35 @@
               </svg>
               Continue Shopping
             </a>
-
             <button (click)="clear()" class="btn btn-outline-danger ms-2">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash me-1" viewBox="0 0 16 16">
                 <!-- Icon -->
                 <path d="M5.5 1a.5.5 0 0 1 .5.5V3h4V1.5a.5.5 0 0 1 1 0V3h1a2 2 0 0 1 2 2v1H2V5a2 2 0 0 1 2-2h1V1.5a.5.5 0 0 1 .5-.5zM2 7v7a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H2z"/>
                 <path fill-rule="evenodd" d="M4.5 10.5a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5zm3 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5zm3 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5z"/>
-
               </svg>
               Clear Cart
             </button>
           </div>
           <!-- Total price -->
           <div>
-            <h4>Total Price: <span class="text-main">{{cartDetails.totalCartPrice | currency }}</span></h4>
+            <h4>Total Price: <span class="text-main">{{ cartDetails.totalCartPrice | currency }}</span></h4>
           </div>
         </div>
 
         <!-- Cart items -->
-        <div *ngIf="cartDetails.products.length > 0; else emptyCart"
-
-          >
+        <div *ngIf="cartDetails.products.length > 0; else emptyCartItems">
           <div class="list-group mb-4">
             <div class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let item of cartDetails.products | filterProducts">
               <!-- Item details -->
               <div class="d-flex align-items-center">
-                <img
-
-                [routerLink]="['/details', cartDetails._id]"
-                [src]="item.product.imageCover" class="img-fluid me-3 cursor-pointer" width="100px" [alt]="item.product.title"  />
+                <img [routerLink]="['/details', cartDetails._id]" [src]="item.product.imageCover" class="img-fluid me-3 cursor-pointer" width="100px" [alt]="item.product.title" />
                 <div>
                   <h5 class="mb-0">{{ item.product.title | termtext : 5 }}</h5>
                   <p class="m-0">Price: <span class="text-main">{{ item.price | currency }}</span></p>
-
                   <p class="m-0"> Quantity:
-
-                    <button (click)="changeCount(item.product._id , item.count -1)" class="btn fas fa-minus btn-sm me-1">
-
-                    </button>
+                    <button (click)="changeCount(item.product._id, item.count - 1)" class="btn fas fa-minus btn-sm me-1"></button>
                     {{ item.count }}
-
-                    <button (click)="changeCount(item.product._id , item.count + 1)" class="btn fas fa-plus btn-sm ms-1">
-                    </button>
+                    <button (click)="changeCount(item.product._id, item.count + 1)" class="btn fas fa-plus btn-sm ms-1"></button>
                   </p>
                 </div>
               </div>
@@ -77,7 +60,7 @@
         </div>
 
         <!-- Empty cart message -->
-        <ng-template #emptyCart>
+        <ng-template #emptyCartItems>
           <p class="text-center">Your cart is empty.</p>
         </ng-template>
       </div>
@@ -86,8 +69,6 @@
 </section>
 
 <!-- Empty cart message -->
-<ng-template #msg>
+<ng-template #emptyCartSection>
   <h2 class="text-center">Your Cart Is Empty...</h2>
 </ng-template>
-
-

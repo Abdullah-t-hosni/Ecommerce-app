@@ -1,19 +1,21 @@
-<app-nav-blank> </app-nav-blank>
+<!-- Navigation component -->
+<app-nav-blank></app-nav-blank>
+
+<!-- Main section with router outlet -->
 <section>
-<div  class="container-fulid py-3 my-3 ">
+  <div class="container-fulid py-3 my-3">
     <router-outlet></router-outlet>
-</div>
+  </div>
 </section>
+
+<!-- Footer component -->
 <app-footer></app-footer>
 
-
-<button
-*ngIf="isButtonVisible"
-(click)="scrollToTop()"
-class="button">
-    <svg class="svgIcon" viewBox="0 0 384 512">
-      <path
-        d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
-      ></path>
-    </svg>
-  </button>
+<!-- Button to scroll to top -->
+<button *ngIf="isButtonVisible" (click)="scrollToTop()" class="button">
+  <svg class="svgIcon" viewBox="0 0 384 512">
+    <path
+      d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
+    ></path>
+  </svg>
+</button>

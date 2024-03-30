@@ -6,16 +6,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class BrandsService {
-  constructor(private _HttpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
   getAllBrands(): Observable<any> {
-    return this._HttpClient.get(
-      'https://ecommerce.routemisr.com/api/v1/brands'
-    );
+    return this.httpClient.get<any>('https://ecommerce.routemisr.com/api/v1/brands');
   }
+
   getSpecificBrand(brandID: string | null): Observable<any> {
-    return this._HttpClient.get(
-      `https://ecommerce.routemisr.com/api/v1/brands/${brandID}`
-    );
+    return this.httpClient.get<any>(`https://ecommerce.routemisr.com/api/v1/brands/${brandID}`);
   }
 }

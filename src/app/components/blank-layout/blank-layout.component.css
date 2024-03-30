@@ -1,15 +1,18 @@
+/* Styles for the host element */
 :host {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   justify-content: space-between;
 }
-.bg{
 
+/* Background styling */
+.bg {
   background-color: rgba(0, 0, 0, 0.867);
   color: azure;
-
 }
+
+/* Button styling */
 .button {
   width: 30px;
   height: 30px;
@@ -30,6 +33,7 @@
   position: fixed;
 }
 
+/* Icon styling */
 .svgIcon {
   width: 12px;
   transition-duration: 0.3s;
@@ -39,6 +43,7 @@
   fill: white;
 }
 
+/* Button hover effect */
 .button:hover {
   width: 140px;
   border-radius: 50px;
@@ -47,25 +52,25 @@
   align-items: center;
 }
 
+/* Icon hover effect */
 .button:hover .svgIcon {
-  /* width: 20px; */
   transition-duration: 0.3s;
   transform: translateY(-200%);
 }
 
+/* Tooltip styling */
 .button::before {
   position: absolute;
   bottom: -20px;
   content: "Back to Top";
   color: white;
-  /* transition-duration: .3s; */
   font-size: 0px;
 }
 
+/* Tooltip hover effect */
 .button:hover::before {
   font-size: 13px;
   opacity: 1;
   bottom: unset;
-  /* transform: translateY(-30px); */
   transition-duration: 0.3s;
 }

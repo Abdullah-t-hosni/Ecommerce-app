@@ -1,127 +1,25 @@
-<!-- <section class="bg-main-light p-4 rounded my-3 w-75 mx-auto">
-  <h1>Login</h1>
-
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="mb-2">
-      <label for="email">Email</label>
-      <input
-      #inputEmail
-        type="email"
-        id="email"
-        class="form-control"
-        formControlName="email"
-      />
-
-    </div>
-    <div class="mb-2">
-      <label for="password">Password</label>
-      <input
-      #inputPassword
-        type="password"
-        id="password"
-        class="form-control"
-        formControlName="password"
-      />
-
-    </div>
-
-    <button
-      type="submit"
-      class="btn-main m-auto d-block"
-    >
-      <i><i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i></i>
-      Login
-    </button>
-    <p class="alert alert-danger" *ngIf="msgError">{{ msgError }}</p>
-  </form>
-  <div class="text-center my-2 "  >
-    <p>Don't have an account? <a class="text-main" routerLink="/register">Register Now</a></p>
-    <p>Forgot password? <a class="text-main" routerLink="/forgot-password">Reset Password</a></p>
-  </div>
-
-</section> -->
-
-<!-- <div class="limiter">
-  <div class="container-login100">
-    <div class="wrap-login100">
-
-      <form
-        class="login100-form"
-        [formGroup]="loginForm"
-        (ngSubmit)="onSubmit()"
-      >
-        <span class="login100-form-title"> Member Login </span>
-
-        <div class="wrap-input100 validate-input" >
-          <input
-            id="email"
-            #inputEmail
-            formControlName="email"
-            class="input100"
-            type="text"
-            name="email"
-            placeholder="Email"
-          />
-          <span class="focus-input100"></span>
-          <span class="symbol-input100">
-            <i class="fa fa-envelope" aria-hidden="true"></i>
-          </span>
-        </div>
-
-        <div class="wrap-input100 validate-input">
-          <input
-            id="password"
-            #inputPassword
-            formControlName="password"
-            class="input100"
-            type="password"
-            placeholder="Password"
-          />
-          <span class="focus-input100"></span>
-          <span class="symbol-input100">
-            <i class="fa fa-lock" aria-hidden="true"></i>
-          </span>
-        </div>
-
-        <div class="container-login100-form-btn">
-          <button class="login100-form-btn">
-            <i><i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i></i>
-            Login</button>
-            <p class="alert alert-danger" *ngIf="msgError">{{ msgError }}</p>
-        </div>
-
-        <div class="text-center p-t-12">
-          <span class="txt1"> Forgot </span>
-          <a class="txt2"  routerLink="/forgot-password" >Password? </a>
-        </div>
-
-        <div class="text-center p-t-136">
-          <a class="txt2" routerLink="/register" >
-            Create your Account
-            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-          </a>
-        </div>
-      </form>
-
-  <div class="login100-pic js-tilt">
-        <img src="./assets/images/undraw_file_sync_ot38.svg" alt="IMG" />
-      </div>
-    </div>
-  </div>
-</div> -->
-
-
-<section >
+<section>
+  <!-- Background wave image -->
   <img class="wave" src="./assets/images/wave.png">
-	<div class="container">
-		<div class="img">
-			<img src="./assets/images/bg.svg">
-		</div>
-		<div class="login-content">
-			<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-				<img src="../../../../assets/images/avatar.svg">
-				<h2 class="title">Welcome</h2>
-        <div class="wrap-input100 validate-input" >
+
+  <!-- Container for login section -->
+  <div class="container">
+    <!-- Image section -->
+    <div class="img">
+      <img src="./assets/images/bg.svg">
+    </div>
+
+    <!-- Login content -->
+    <div class="login-content">
+      <!-- Login form -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- Avatar image -->
+        <img src="../../../../assets/images/avatar.svg">
+        <!-- Title -->
+        <h2 class="title">Welcome</h2>
+
+        <!-- Input for email -->
+        <div class="wrap-input100 validate-input">
           <input
             id="email"
             #inputEmail
@@ -136,6 +34,8 @@
             <i class="fa fa-envelope" aria-hidden="true"></i>
           </span>
         </div>
+
+        <!-- Input for password -->
         <div class="wrap-input100 validate-input">
           <input
             id="password"
@@ -150,30 +50,30 @@
             <i class="fa fa-lock" aria-hidden="true"></i>
           </span>
         </div>
+
+        <!-- Button for login -->
         <div class="container-login100-form-btn">
           <button class="login100-form-btn">
             <i><i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i></i>
-            Login</button>
-            <p class="alert alert-danger" *ngIf="msgError">{{ msgError }}</p>
+            Login
+          </button>
+          <!-- Error message -->
+          <p class="alert alert-danger" *ngIf="msgError">{{ msgError }}</p>
         </div>
 
-
+        <!-- Forgot password and create account links -->
         <div class="d-flex justify-content-between mt-3">
-          <div class=" text-center ">
-            <a class="txt2"  routerLink="/forgot-password" >Forgot Password? </a>
+          <div class="text-center">
+            <a class="txt2" routerLink="/forgot-password">Forgot Password?</a>
           </div>
-
-          <div class="text-center ">
-            <a class="txt2" routerLink="/register" >
+          <div class="text-center">
+            <a class="txt2" routerLink="/register">
               Create your Account
               <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
             </a>
           </div>
         </div>
-            </form>
-
-        </div>
+      </form>
     </div>
-
+  </div>
 </section>
-

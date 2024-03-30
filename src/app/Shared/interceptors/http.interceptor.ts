@@ -12,11 +12,18 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
 
   constructor() {}
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log(request);
-  let newReq  = request.clone({
-      headers:request.headers.set('token',`${localStorage.getItem("eToken")}`)
-    })
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    // Log the intercepted request for debugging purposes
+    console.log('Intercepted Request:', request);
+
+    // Clone the request and append the token to the headers
+    const newReq = request.clone({
+      setHeaders: {
+        'token': `${localStorage.getItem('eToken')}`
+      }
+    });
+
+    // Pass the modified request to the next handler
     return next.handle(newReq);
   }
 }

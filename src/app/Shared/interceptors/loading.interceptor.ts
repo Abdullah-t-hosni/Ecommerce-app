@@ -5,22 +5,24 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
-import { Observable, finalize } from 'rxjs';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
 
-  constructor(private _NgxSpinnerService: NgxSpinnerService) {}
+  constructor(private spinner: NgxSpinnerService) {}
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    // Show the spinner when a request is initiated
+    this.spinner.show();
 
-  this._NgxSpinnerService.show();
+    // Continue handling the request and hide the spinner when it completes
     return next.handle(request).pipe(
-
       finalize(() => {
-        this._NgxSpinnerService.hide();
+        this.spinner.hide();
       })
-    )
+    );
   }
 }

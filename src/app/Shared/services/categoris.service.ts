@@ -5,21 +5,23 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class CategorisService {
-  constructor(private _HttpClient: HttpClient) {}
+export class CategoriesService {
+  constructor(private httpClient: HttpClient) {}
 
   getSpecificCategory(category: string | null): Observable<any> {
-    return this._HttpClient.get(
+    return this.httpClient.get<any>(
       `https://ecommerce.routemisr.com/api/v1/categories/${category}`
     );
   }
+
   getAllCategories(): Observable<any> {
-    return this._HttpClient.get(
+    return this.httpClient.get<any>(
       'https://ecommerce.routemisr.com/api/v1/categories'
     );
   }
+
   getAllSubCategories(): Observable<any> {
-    return this._HttpClient.get(
+    return this.httpClient.get<any>(
       'https://route-ecommerce.onrender.com/api/v1/subcategories'
     );
   }

@@ -3,7 +3,6 @@ import { Product } from 'src/app/Shared/interfaces/product';
 import { WhishlistService } from 'src/app/Shared/services/whishlist.service';
 import { ToastrService } from 'ngx-toastr';
 import { CartService } from 'src/app/Shared/services/cart.service';
-import { termtextPipe } from '../../termtext.pipe'
 
 @Component({
   selector: 'app-whishlist',
@@ -11,65 +10,58 @@ import { termtextPipe } from '../../termtext.pipe'
   styleUrls: ['./whishlist.component.css'],
 })
 export class WhishlistComponent implements OnInit {
-  products: Product[] =  [];
-  wishListData: null | string[] = [];
+  products: Product[] = [];
+  wishListData: string[] | null = null;
 
   constructor(
-    private _WhishlistService: WhishlistService,
-    private _ToastrService: ToastrService,
-    private _CartService: CartService,
-    private _Renderer2: Renderer2
+    private wishlistService: WhishlistService,
+    private toastrService: ToastrService,
+    private cartService: CartService,
+    private renderer: Renderer2
   ) {}
 
   ngOnInit(): void {
-    this.getWish()
+    this.getWishlist();
   }
 
-  getWish(){
-    this._WhishlistService.getWishList().subscribe({
+  getWishlist(): void {
+    this.wishlistService.getWishList().subscribe({
       next: (response) => {
         this.products = response.data;
-        let newData = response.data.map((item: any) => item._id);
-        this.wishListData = newData;
+        this.wishListData = response.data.map((item: any) => item._id);
       },
-
     });
   }
 
   addCart(id: string, element: HTMLButtonElement): void {
-    this._Renderer2.setAttribute(element, 'disabled', 'true');
-    this._CartService.addToCart(id).subscribe({
+    this.renderer.setAttribute(element, 'disabled', 'true');
+    this.cartService.addToCart(id).subscribe({
       next: (response) => {
-        this._ToastrService.success(response.message);
-        this._Renderer2.removeAttribute(element, 'disabled');
-        this._CartService.totalCartItems.next(response.numOfCartItems);
+        this.toastrService.success(response.message);
+        this.renderer.removeAttribute(element, 'disabled');
+        this.cartService.totalCartItems.next(response.numOfCartItems);
       },
-
-      error: (err) => {
-        this._Renderer2.removeAttribute(element, 'disabled');
+      error: () => {
+        this.renderer.removeAttribute(element, 'disabled');
       },
     });
   }
-  addFav(id: string): void {
-    this._WhishlistService.addToWishList(id).subscribe({
-      next: (response) => {
 
-        this._ToastrService.success(response.message);
+  addFav(id: string): void {
+    this.wishlistService.addToWishList(id).subscribe({
+      next: (response) => {
+        this.toastrService.success(response.message);
         this.wishListData = response.data;
       },
     });
   }
 
   removeFav(id: string): void {
-    this._WhishlistService.removeFromWishList(id).subscribe({
+    this.wishlistService.removeFromWishList(id).subscribe({
       next: (response) => {
-        this._ToastrService.success(response.message);
+        this.toastrService.success(response.message);
         this.wishListData = response.data;
-
-        const newList = this.products.filter((item) =>
-          this.wishListData?.includes(item._id)
-        );
-        this.products = newList;
+        this.products = this.products.filter((item) => this.wishListData?.includes(item._id));
       },
     });
   }

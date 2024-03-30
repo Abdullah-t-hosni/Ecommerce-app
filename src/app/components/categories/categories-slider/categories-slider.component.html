@@ -7,9 +7,9 @@
       <owl-carousel-o [options]="categoriesSliderOption">
         <ng-container *ngFor="let item of category">
           <ng-template carouselSlide [id]="item._id">
-            <div class="px-3" [routerLink]="['/subcategory/'+ item._id]" class="cursor-pointer">
+            <div class="px-3 cursor-pointer" [routerLink]="['/subcategory/'+ item._id]">
               <!-- item -->
-              <img [src]="item.image"  [alt]="item.slug" class="w-100 mb-3" height="200" />
+              <img [src]="item.image" [alt]="item.slug" class="w-100 mb-3" height="200" />
               <h3 class="font-sm">{{item.name}}</h3>
             </div>
           </ng-template>

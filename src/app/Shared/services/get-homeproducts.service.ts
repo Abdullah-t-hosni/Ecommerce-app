@@ -6,15 +6,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class GetHomeproductsService {
-  constructor(private _HttpClient: HttpClient) {}
-  gitHomeProducts(pageNumber: number = 1): Observable<any> {
-    return this._HttpClient.get(
-      `https://ecommerce.routemisr.com/api/v1/products?page=${pageNumber}`
-    );
+  constructor(private httpClient: HttpClient) {}
+
+  getHomeProducts(pageNumber: number = 1): Observable<any> {
+    return this.httpClient.get(`https://ecommerce.routemisr.com/api/v1/products?page=${pageNumber}`);
   }
-  getDetails(productID: any): Observable<any> {
-    return this._HttpClient.get(
-      `https://ecommerce.routemisr.com/api/v1/products/${productID}`
-    );
+
+  getDetails(productId: any): Observable<any> {
+    return this.httpClient.get(`https://ecommerce.routemisr.com/api/v1/products/${productId}`);
   }
 }

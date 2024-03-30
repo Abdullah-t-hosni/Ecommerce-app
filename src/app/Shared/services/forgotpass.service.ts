@@ -1,4 +1,4 @@
- import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -7,20 +7,19 @@ import { Observable } from 'rxjs';
 })
 export class ForgotpassService {
 
-  constructor(private _HttpClient:HttpClient) { }
+  private baseUrl = 'https://ecommerce.routemisr.com/api/v1/auth/';
 
-  bseUrl:string =`https://ecommerce.routemisr.com/api/v1/auth/`
- 
+  constructor(private httpClient: HttpClient) { }
 
-  forgotPassword(userEmail:object):Observable<any>{
-    return this._HttpClient.post( this.bseUrl + `forgotPasswords`,userEmail)
+  forgotPassword(userEmail: any): Observable<any> {
+    return this.httpClient.post(`${this.baseUrl}forgotPasswords`, userEmail);
   }
 
-  resetcode(resetCode:object):Observable<any>{
-    return this._HttpClient.post( this.bseUrl + `verifyResetCode`,resetCode)
+  resetcode(resetCode: any): Observable<any> {
+    return this.httpClient.post(`${this.baseUrl}verifyResetCode`, resetCode);
   }
 
-  resetPassword(resetPasswordForm:object):Observable<any>{
-    return this._HttpClient.put( this.bseUrl + `resetPassword`,resetPasswordForm)
+  resetPassword(resetPasswordForm: any): Observable<any> {
+    return this.httpClient.put(`${this.baseUrl}resetPassword`, resetPasswordForm);
   }
 }

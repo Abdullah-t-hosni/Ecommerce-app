@@ -1,9 +1,7 @@
-import { Component } from '@angular/core';
-import { OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EcomdataService } from 'src/app/Shared/services/ecomdata.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Categories } from 'src/app/Shared/interfaces/categories';
-
 
 @Component({
   selector: 'app-categories-slider',
@@ -11,9 +9,7 @@ import { Categories } from 'src/app/Shared/interfaces/categories';
   styleUrls: ['./categories-slider.component.css']
 })
 export class CategoriesSliderComponent implements OnInit {
-  constructor(private _EcomdataService: EcomdataService  ) {}
-
-  category  : Categories[] = [] 
+  category: Categories[] = [];
   categoriesSliderOption: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -25,39 +21,28 @@ export class CategoriesSliderComponent implements OnInit {
     autoplay: true,
     margin: 10,
     responsive: {
-      0: {
-        items: 1
-      },
-      400: {
-        items: 2
-      },
-      740: {
-        items: 3
-      },
-      940: {
-        items: 9
-      }
+      0: { items: 1 },
+      400: { items: 2 },
+      740: { items: 3 },
+      940: { items: 9 }
     },
     nav: true
-  }
-  
+  };
 
- 
+  constructor(private _EcomdataService: EcomdataService) {}
 
   ngOnInit(): void {
-       //get Categories..
+    this.getCategories();
+  }
 
-  this._EcomdataService.getCategories().subscribe({
-    next: (response) => {
-      this.category = response.data;
-    },
-
-    error: (err) => {
-      console.log(err);
-      
-    }
-  })
-
-}
-
+  getCategories(): void {
+    this._EcomdataService.getCategories().subscribe({
+      next: (response) => {
+        this.category = response.data;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
 }

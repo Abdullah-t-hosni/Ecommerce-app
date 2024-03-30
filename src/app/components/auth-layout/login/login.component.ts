@@ -1,11 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Shared/services/auth.service';
 
@@ -16,24 +11,18 @@ import { AuthService } from 'src/app/Shared/services/auth.service';
 })
 export class LoginComponent {
 
-
+  // Constructor to inject dependencies
   constructor(
     private _AuthService: AuthService,
     private _Router: Router,
     private _FormBuilder: FormBuilder
   ) {}
 
-  msgError: string = '';
-  isLoading: boolean = false;
+  // Properties
+  msgError: string = ''; // Holds error message
+  isLoading: boolean = false; // Indicates loading state
 
-  // loginForm: FormGroup = new FormGroup({
-  //   email: new FormControl('', [Validators.required, Validators.email]),
-  //   password: new FormControl('', [
-  //     Validators.required,
-  //     Validators.pattern(/^[A-Z][a-z0-9]{6,20}$/),
-  //   ]),
-  // });
-
+  // Form group for login
   loginForm = this._FormBuilder.group({
     email: ['', [Validators.required, Validators.email]],
     password: [
@@ -41,30 +30,30 @@ export class LoginComponent {
       [Validators.required, Validators.pattern(/^[A-Z][a-z0-9]{6,20}$/)],
     ],
   });
-  onSubmit(): void {
-    if (this.loginForm.value) {
-      this.isLoading = true;
 
-      this._AuthService.setLogin(this.loginForm.value).subscribe({
+  // Function to handle form submission
+  onSubmit(): void {
+    if (this.loginForm.value) { // Check if form is valid
+      this.isLoading = true; // Set loading state to true
+
+      // Call AuthService to perform login
+      this._AuthService.login(this.loginForm.value).subscribe({
         next: (response) => {
+          // If login is successful, navigate to home page
           if (response.message == 'success') {
-            this.isLoading = false;
-            localStorage.setItem('eToken', response.token);
-            this._AuthService.saveUserData();
-            this._Router.navigate(['/home']);
+            this.isLoading = false; // Set loading state to false
+            localStorage.setItem('eToken', response.token); // Store token in local storage
+            this._AuthService.saveUserData(); // Save user data
+            this._Router.navigate(['/home']); // Navigate to home page
           }
         },
         error: (err: HttpErrorResponse) => {
+          // If there's an error, set error message and reset loading state
           this.isLoading = false;
           this.msgError = err.error.message;
         },
-
-        complete: () => console.log('success'),
+        complete: () => console.log('success'), // Log completion
       });
     }
   }
-
-
-  
 }
-

@@ -1,10 +1,8 @@
-import { Data } from './../../Shared/interfaces/single-order';
-import { AllordersService } from './../../Shared/services/allorders.service';
 import { Component, OnInit } from '@angular/core';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CartService } from 'src/app/Shared/services/cart.service';
 import { Product } from 'src/app/Shared/interfaces/product';
-import { Cart } from 'src/app/Shared/interfaces/cart';
+import { AllordersService } from 'src/app/Shared/services/allorders.service';
 import { Allorders } from 'src/app/Shared/interfaces/allorders';
 
 @Component({
@@ -14,21 +12,20 @@ import { Allorders } from 'src/app/Shared/interfaces/allorders';
 })
 export class CartComponent implements OnInit {
   cartDetails: any;
-
-
   product: Product[] = [];
   allOrders!: Allorders;
 
-  constructor(private _CartService: CartService, private _Router: Router,
-
-    private _AllordersService: AllordersService) {}
+  constructor(
+    private _CartService: CartService,
+    private _Router: Router,
+    private _AllordersService: AllordersService
+  ) {}
 
   removeFromCart(id: string): void {
     this._CartService.removeItem(id).subscribe({
       next: (response) => {
         this.cartDetails = response.data;
       },
-
     });
   }
 
@@ -37,7 +34,6 @@ export class CartComponent implements OnInit {
       next: (response) => {
         this.cartDetails = response.data;
       },
-
     });
   }
 
@@ -50,7 +46,6 @@ export class CartComponent implements OnInit {
       next: (response) => {
         this.cartDetails = response.data;
       },
-
     });
   }
 
@@ -58,12 +53,9 @@ export class CartComponent implements OnInit {
     this._CartService.clearCart().subscribe({
       next: (response) => {
         if (response.message === 'success') {
-          this.cartDetails =  null;
+          this.cartDetails = null;
         }
-
-
       },
-
     });
   }
 }

@@ -1,119 +1,11 @@
-<!-- <nav class="navbar navbar-expand-lg bg-main-light fixed-top">
-  <div class="container">
-    <a class="navbar-brand" routerLink="home">
-      <img src="assets/images/freshcart-logo.svg" alt="logo" />
-    </a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div
-      class="collapse navbar-collapse navbar-nav-scroll"
-      id="navbarSupportedContent"
-    >
-      <ul class="navbar-nav m-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a
-            class="nav-link text-capitalize"
-            routerLinkActive="active-link"
-            routerLink="home"
-            >Home</a
-          >
-        </li>
-
-        <li class="nav-item">
-          <a
-            class="nav-link text-capitalize"
-            routerLinkActive="active-link"
-            routerLink="products"
-            >products</a
-          >
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link text-capitalize"
-            routerLinkActive="active-link"
-            routerLink="categories"
-            >categories</a
-          >
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link text-capitalize"
-            routerLinkActive="active-link"
-            routerLink="brands"
-            >brands</a
-          >
-        </li>
-      </ul>
-      <div class="dropdown">
-        <button
-          class="btn btn-success
-           dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <i class="fa-solid fa-user"></i>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <li class="nav-item">
-            <a class="dropdown-item nav-link text-center" routerLinkActive="active-link" routerLink="settings">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="dropdown-item nav-link text-center" routerLinkActive="active-link" routerLink="/allorders">
-              <i class="fa-solid fa-truck fa-1x"></i> My Orders
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="dropdown-item nav-link text-center" routerLinkActive="active-link" routerLink="/whishlist">
-              <i class="fa-solid fa-heart fa-1x text-danger"></i> Wishlist
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="dropdown-item nav-link text-center" routerLinkActive="active-link" routerLink="cart">
-              <i class="fas fa-shopping-cart fa-1x"></i> Cart
-              <span class="badge bg-main">
-                {{ numOfCartItems }}
-              </span>
-            </a>
-          </li>
-
-        </ul>
-      </div>
-      <button class="Btn mx-2">
-        <div class="sign">
-          <svg viewBox="0 0 512 512">
-            <path
-              d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"
-            ></path>
-          </svg>
-        </div>
-
-        <div (click)="logOutUser()" class="text">SignOut</div>
-      </button>
-    </div>
-  </div>
-</nav> -->
-
-
-
-
-
-
+<!-- Navigation Bar -->
 <nav class="navbar navbar-expand-lg bg-main-light fixed-top">
   <div class="container-fluid">
+    <!-- Logo -->
     <a class="navbar-brand" routerLink="home">
       <img src="assets/images/freshcart-logo.svg" alt="logo" />
     </a>
+    <!-- Navbar Toggler -->
     <button
       class="navbar-toggler"
       type="button"
@@ -125,10 +17,12 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+    <!-- Navbar Content -->
     <div
       class="collapse navbar-collapse navbar-nav-scroll"
       id="navbarSupportedContent"
     >
+      <!-- Main Navigation Links -->
       <ul class="navbar-nav m-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a
@@ -138,7 +32,6 @@
             >Home</a
           >
         </li>
-
         <li class="nav-item">
           <a
             class="nav-link text-capitalize"
@@ -163,35 +56,40 @@
             >Brands</a
           >
         </li>
+        <!-- Additional Link (My Orders) -->
         <li class="nav-item text-capitalize">
-          <a class=" nav-link text-center" routerLinkActive="active-link" routerLink="/allorders">
+          <a class="nav-link text-center" routerLinkActive="active-link" routerLink="/allorders">
             <i class="fa-solid fa-truck fa-1x"></i> My Orders
           </a>
         </li>
       </ul>
-      <div class="d-flex  mx-2">
-
-      </div>
+      <!-- Cart and Wishlist Icons -->
       <ul class="navbar-nav ms-2">
         <li>
-        <a class=" nav-link position-relative" routerLinkActive="active-link" routerLink="cart">
-          <i class="fas fa-shopping-cart fa-2x"></i>
-          <span class="notification ">
-            {{ numOfCartItems }}
-          </span>
-        </a>
+          <a class="nav-link position-relative" routerLinkActive="active-link" routerLink="cart">
+            <i class="fas fa-shopping-cart fa-2x"></i>
+            <span class="notification">
+              {{ numOfCartItems }}
+            </span>
+          </a>
         </li>
-        <li class="nav-link ">
+        <li class="nav-link">
+          <!-- Like (Wishlist) Button -->
           <label class="ui-like">
             <input type="checkbox">
-            <div class="like " routerLink="whishlist">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill=""><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"><path d="M20.808,11.079C19.829,16.132,12,20.5,12,20.5s-7.829-4.368-8.808-9.421C2.227,6.1,5.066,3.5,8,3.5a4.444,4.444,0,0,1,4,2,4.444,4.444,0,0,1,4-2C18.934,3.5,21.773,6.1,20.808,11.079Z"></path></g></svg>
-               </div>
+            <div class="like" routerLink="whishlist">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="">
+                <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
+                <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path d="M20.808,11.079C19.829,16.132,12,20.5,12,20.5s-7.829-4.368-8.808-9.421C2.227,6.1,5.066,3.5,8,3.5a4.444,4.444,0,0,1,4,2,4.444,4.444,0,0,1,4-2C18.934,3.5,21.773,6.1,20.808,11.079Z"></path>
+                </g>
+              </svg>
+            </div>
           </label>
-      </li>
-
-
+        </li>
       </ul>
+      <!-- User Menu Button -->
       <button class="Btn mx-2">
         <div class="sign">
           <svg viewBox="0 0 512 512">
@@ -200,14 +98,9 @@
             ></path>
           </svg>
         </div>
-
-        <div (click)="logOutUser()" class="text">SignOut</div>
+        <!-- Sign Out Text -->
+        <div (click)="logOutUser()" class="text">Sign Out</div>
       </button>
-  </div>
-
-
+    </div>
   </div>
 </nav>
-
-
-

@@ -1,13 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EcomdataService } from 'src/app/Shared/services/ecomdata.service';
 import { GetHomeproductsService } from '../../Shared/services/get-homeproducts.service';
-import { OffersService } from '../../Shared/services/offers.service';
 import { SharedProductsService } from '../../Shared/services/shared-products.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Allproducts } from '../../Shared/interfaces/allproducts';
 import { Subscription } from 'rxjs';
-import { Successadd } from '../../Shared/interfaces/successadd';
+import { Success } from '../../Shared/interfaces/success';
 import { CartService } from 'src/app/Shared/services/cart.service';
 import { WhishlistService } from 'src/app/Shared/services/whishlist.service';
 
@@ -20,7 +19,6 @@ import { WhishlistService } from 'src/app/Shared/services/whishlist.service';
 export class HomeComponent implements OnInit, OnDestroy {
   constructor(
     private _GetHomeproductsService: GetHomeproductsService,
-    private _OffersService: OffersService,
     private _SharedProductsService: SharedProductsService,
     private _Router: Router,
     private _CartService: CartService,
@@ -44,7 +42,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   getAllproducts(): void {
-    this.callApi = this._GetHomeproductsService.gitHomeProducts().subscribe({
+    this.callApi = this._GetHomeproductsService.getHomeProducts().subscribe({
       next: (response) => {
         let allProductsResponse: Allproducts[] = response.data;
         let randomNumberArr: number[] = [];
@@ -65,9 +63,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this._SharedProductsService.currentProducts = response.data;
         this.productsLoaded = false;
       },
-      error: (error) => {
-        console.log(error);
-      },
+
     });
   }
 
@@ -80,9 +76,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     lightBox.classList.add('d-none');
   }
 
-  getOffer(i: number, items: Allproducts[]): number {
-    return this._OffersService.getOffer(i, items);
-  }
+
 
   changedisplayClicOne(): void {
     this.changeDisplay = true;
@@ -105,7 +99,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   addToCart(_Id: string): void {
     this._CartService.addToCart(_Id).subscribe({
-      next: (response: Successadd) => {
+      next: (response: Success) => {
         let cartTotalProducts = 0;
         response.data.products.forEach((element) => {
           cartTotalProducts += element.count;

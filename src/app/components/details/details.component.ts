@@ -1,10 +1,11 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EcomdataService } from 'src/app/Shared/services/ecomdata.service';
-import { Product } from 'src/app/Shared/interfaces/product';
-import { OwlOptions } from 'ngx-owl-carousel-o';
-import { CartService } from 'src/app/Shared/services/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { OwlOptions } from 'ngx-owl-carousel-o';
+import { EcomdataService } from 'src/app/Shared/services/ecomdata.service';
+import { CartService } from 'src/app/Shared/services/cart.service';
+import { Product } from 'src/app/Shared/interfaces/product';
+
 
 @Component({
   selector: 'app-details',
@@ -12,16 +13,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./details.component.css'],
 })
 export class DetailsComponent implements OnInit {
-
-  constructor(
-    private _ActivatedRoute: ActivatedRoute,
-    private _EcomdataService: EcomdataService,
-    private _CartService: CartService,
-    private _ToastrService: ToastrService,
-    private _Renderer2:Renderer2
-  ) {}
-
-
+  productDetails: Product = {} as Product;
   detailsSlider: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -34,37 +26,40 @@ export class DetailsComponent implements OnInit {
     nav: false,
   };
 
-  productDetails: Product = {} as Product;
-  ngOnInit(): void {
-    this._ActivatedRoute.paramMap.subscribe({
-      next: (params) => {
-        let idProduct: any = params.get('id');
-        this._EcomdataService.getProductDetails(idProduct).subscribe({
-          next: (response) => {
-            this.productDetails = response.data;
-          },
-        });
-      },
+  constructor(
+    private _activatedRoute: ActivatedRoute,
+    private _ecomdataService: EcomdataService,
+    private _cartService: CartService,
+    private _toastrService: ToastrService,
+    private _renderer2: Renderer2
+  ) {}
+
+   ngOnInit(): void {
+    this._activatedRoute.paramMap.subscribe((params) => {
+      const idProduct = params.get('id');
+      this._ecomdataService.getProductDetails(idProduct).subscribe({
+        next: (response) => {
+          this.productDetails = response.data;
+        },
+      });
     });
   }
 
-
-
-  addCart(id: string ,element:HTMLButtonElement ): void {
-    this._Renderer2.setAttribute(element, 'disabled', 'true');
-    this._CartService.addToCart(id).subscribe({
-      next: (response) => {
-
-        this._ToastrService.success(response.message);
-        this._Renderer2.removeAttribute(element, 'disabled');
-        this._CartService.totalCartItems.next(
-          response.numOfCartItems
-        )
-      },
-
-      error: (err) => {
-        this._Renderer2.removeAttribute(element, 'disabled');
-      },
-    });
+  addCart(id: string, element: HTMLButtonElement): void {
+    if (id) {
+      this._renderer2.setAttribute(element, 'disabled', 'true');
+      this._cartService.addToCart(id).subscribe({
+        next: (response) => {
+          this._toastrService.success(response.message);
+          this._renderer2.removeAttribute(element, 'disabled');
+          this._cartService.totalCartItems.next(response.numOfCartItems);
+        },
+        error: (error) => {
+          console.error('Error occurred while adding to cart:', error);
+          this._renderer2.removeAttribute(element, 'disabled');
+        },
+      });
+    }
   }
+
 }

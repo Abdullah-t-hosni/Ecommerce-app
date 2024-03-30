@@ -1,4 +1,4 @@
-export interface Successadd {
+export interface Success {
   status: string;
   message: string;
   numOfCartItems: number;

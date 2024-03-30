@@ -1,29 +1,29 @@
-import { Component } from '@angular/core';
-import { OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EcomdataService } from 'src/app/Shared/services/ecomdata.service';
 import { Categories } from 'src/app/Shared/interfaces/categories';
-import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.css'],
 })
 export class CategoriesComponent implements OnInit {
-  AllCategories: Categories[] = [];
+  allCategories: Categories[] = [];
 
-  constructor(private _EcomdataService: EcomdataService , private _ActivatedRoute:ActivatedRoute) {}
+  constructor(private ecomdataService: EcomdataService) {}
 
   ngOnInit(): void {
-    //get Categories..
+    this.getCategories();
+  }
 
-    this._EcomdataService.getCategories().subscribe({
+  getCategories(): void {
+    this.ecomdataService.getCategories().subscribe({
       next: (response) => {
-        this.AllCategories = response.data;
+        this.allCategories = response.data;
+      },
+      error: (error) => {
+        console.error('Error fetching categories:', error);
       },
     });
-
   }
-
-  }
-
-
+}

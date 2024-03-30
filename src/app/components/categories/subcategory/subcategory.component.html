@@ -1,84 +1,3 @@
-<!-- <section class="my-5">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="d-flex justify-content-between align-items-center">
-          <h2 class="mb-0">{{ categoryDetails.name }}</h2>
-          <div class="d-flex align-items-center">
-            <span class="text-muted me-2"
-              >Showing {{ categoryProducts.length }} results
-            </span>
-            <ng-container *ngIf="searchTitle">
-              <span class="text-decoration-underline">"{{ searchTitle }}"</span>
-            </ng-container>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mt-5 g-4"
-    >
-      <ng-container
-        *ngFor="let item of categoryProducts | search : searchTitle; index as i"
-      >
-        <div
-          class="col p-0 position-relative parent overflow-hidden"
-          [routerLink]="['/details', item._id]"
-        >
-          <div
-            class="product p-2 px-3 d-flex flex-column justify-content-between child cursor-pointer"
-          >
-            <div class="">
-              <div class="position-relative overflow-hidden">
-                <img
-                  class="w-100"
-                  [src]="item.imageCover"
-                  [alt]="item.category.name"
-                />
-              </div>
-              <hr />
-              <div class="d-flex flex-column">
-                <div>
-                  <p class="fw-bold h5 mb-0">{{ item.title }}</p>
-                  <h2
-                    class="fw-bolder h6 mb-0"
-                    [style]="'color:var(--main-color);'"
-                  >
-                    {{ item.slug }}
-                  </h2>
-                </div>
-                <div>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <p class="mb-0 d-flex align-items-center">
-                      <span class="h6 fw-bolder d-flex align-items-center mb-0">
-                        <span>{{ item.price | currency }}</span>
-                      </span>
-                    </p>
-                    <div class="d-flex align-items-center">
-                      <i
-                        class="fa-regular fa-heart text-yellow me-2"
-                        [ngClass]="
-                          currentWishList.includes($any(item._id))
-                            ? 'text-main'
-                            : ''
-                        "
-                      ></i>
-                      {{ item.ratingsAverage }}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </ng-container>
-    </div>
-  </div>
-</section> -->
-
-
 <section class="my-5">
   <div class="container">
     <div class="row">
@@ -86,18 +5,14 @@
         <h2 class="mb-4">{{ categoryDetails.name }}</h2>
         <p class="text-main fw-bold mb-4">
           Showing {{ categoryProducts.length }} results
-          <ng-container *ngIf="searchTitle">
-            for "{{ searchTitle }}"
-          </ng-container>
+          <ng-container *ngIf="searchTitle">for "{{ searchTitle }}"</ng-container>
         </p>
       </div>
     </div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mt-4 g-4">
       <ng-container *ngFor="let item of categoryProducts | search : searchTitle; index as i">
         <div class="col mb-4">
-          <div class="product card child  cursor-pointer"
-            [routerLink]="['/details', item._id]"
-          >
+          <div class="product card child cursor-pointer" [routerLink]="['/details', item._id]">
             <img class="card-img-top" [src]="item.imageCover" [alt]="item.category.name" />
             <div class="card-body">
               <h5 class="card-title">{{ item.title | termtext : 2  }}</h5>
@@ -118,4 +33,3 @@
     </div>
   </div>
 </section>
-

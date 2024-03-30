@@ -1,44 +1,39 @@
-<div class=" w-50 mx-auto py-5 ">
-    <form [formGroup]="shippingAddress" (ngSubmit)="handleOnline()" >
-        <div class="mb-2">
-            <label for="address">Address</label>
-            <input
-            formControlName="address"
-                type="text"
-                id="address"
-                class="form-control"
-                placeholder="Enter your address"
-                required
-            />
-        </div>
-        <div class="mb-2">
-            <label for="city">City</label>
-            <input
-                formControlName="city"
-                type="text"
-                id="city"
-                class="form-control"
-                placeholder="Enter your city"
-                required
-            />
-        </div>
-        <div class="mb-2">
-            <label for="phone">phone</label>
-            <input
-                formControlName="phone"
-                type="tel"
-                id="phone"
-                class="form-control"
-                placeholder="Enter your phone"
-                required
-            />
-        </div>
+<div class="w-50 mx-auto py-5">
+  <form [formGroup]="shippingAddress" (ngSubmit)="handleOnline()">
+    <div class="mb-2">
+      <label for="address">Address</label>
+      <input
+        formControlName="address"
+        type="text"
+        id="address"
+        class="form-control"
+        placeholder="Enter your address"
+        required
+      />
+    </div>
+    <div class="mb-2">
+      <label for="city">City</label>
+      <input
+        formControlName="city"
+        type="text"
+        id="city"
+        class="form-control"
+        placeholder="Enter your city"
+        required
+      />
+    </div>
+    <div class="mb-2">
+      <label for="phone">Phone</label>
+      <input
+        formControlName="phone"
+        type="tel"
+        id="phone"
+        class="form-control"
+        placeholder="Enter your phone"
+        required
+      />
+    </div>
 
-        <button type="submit" class="btn-main w-100">pay</button>
-    </form>
+    <button type="submit" class="btn-main w-100">Pay</button>
+  </form>
 </div>
-
-
-
-
-

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {BehaviorSubject, Observable} from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { Router } from '@angular/router';
 
@@ -8,35 +8,28 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  UserData: BehaviorSubject<any | null> = new BehaviorSubject(null);
-  constructor(private _HttpClient: HttpClient , private _Router: Router) {}
+  userData: BehaviorSubject<any | null> = new BehaviorSubject(null);
 
-    logout():void {
-      localStorage.removeItem('eToken');
-      this._Router.navigate(['/login']);
+  constructor(private httpClient: HttpClient, private router: Router) {}
+
+  logout(): void {
+    localStorage.removeItem('eToken');
+    this.router.navigate(['/login']);
+  }
+
+  saveUserData(): void {
+    const encodeToken = localStorage.getItem('eToken');
+    if (encodeToken) {
+      const decodedToken = jwtDecode(encodeToken);
+      this.userData.next(decodedToken);
     }
-
-  saveUserData() {
-    if (localStorage.getItem('eToken') != null) {
-      let encodeToken:any = localStorage.getItem('eToken');
-      let decodedToken = jwtDecode(encodeToken);
-      this.UserData.next(decodedToken);
-    }
   }
 
-  setRegister(userData: Object): Observable<any> {
-    return this._HttpClient.post(
-      `https://ecommerce.routemisr.com/api/v1/auth/signup`,
-      userData
-    );
+  register(userData: Object): Observable<any> {
+    return this.httpClient.post<any>('https://ecommerce.routemisr.com/api/v1/auth/signup', userData);
   }
 
-  setLogin(userData: Object): Observable<any> {
-    return this._HttpClient.post(
-      `https://ecommerce.routemisr.com/api/v1/auth/signin`,
-      userData
-    );
+  login(userData: Object): Observable<any> {
+    return this.httpClient.post<any>('https://ecommerce.routemisr.com/api/v1/auth/signin', userData);
   }
-
-
 }
