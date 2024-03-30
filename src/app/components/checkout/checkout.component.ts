@@ -25,10 +25,6 @@ constructor(private _CartService:CartService , private _activatedRoute:Activated
   this._activatedRoute.paramMap.subscribe((response:any)=>{
   this.cartId = response.params.cartId
   })
-
-this._CartService.cartId.subscribe(response =>{
-  this.cartId = response
-})
 }
 handleOnline(){
   this._CartService.generateOnlinePayment(this.cartId,this.shippingAddress.value).subscribe({
