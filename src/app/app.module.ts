@@ -38,12 +38,8 @@ import { LoadingInterceptor } from './Shared/interceptors/loading.interceptor';
 import { WhishlistComponent } from './components/whishlist/whishlist.component';
 import { SubbrandComponent } from './components/brands/subbrand/subbrand.component';
 import { SubcategoryComponent } from './components/categories/subcategory/subcategory.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @NgModule({
   declarations: [
@@ -88,14 +84,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     FormsModule,
     ToastrModule.forRoot(),
     RxReactiveFormsModule,
-    NgxSpinnerModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatSlideToggleModule
-
+    NgxSpinnerModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [
     {
@@ -103,10 +93,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
       useClass: HttpInterceptorInterceptor,
       multi: true,
     },
-    {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true},
-
-
-
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

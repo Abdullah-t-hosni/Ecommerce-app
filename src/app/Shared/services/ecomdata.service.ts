@@ -10,8 +10,8 @@ export class EcomdataService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllProducts(): Observable<any> {
-    return this.httpClient.get('https://ecommerce.routemisr.com/api/v1/products')
+  getAllProducts(pageNumber: number = 1): Observable<any> {
+    return this.httpClient.get(`https://ecommerce.routemisr.com/api/v1/products?page=${pageNumber}`)
       .pipe(
         catchError(error => {
           // Handle error here

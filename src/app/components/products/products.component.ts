@@ -16,6 +16,9 @@ export class ProductsComponent implements OnInit {
   products: Product[] = [];
   searchTerm: string = '';
   wishListData: string[] = [];
+  pageSize: number = 0;
+  currentPage: number = 1;
+  total: number = 0;
 
   constructor(
     private ecomdataService: EcomdataService,
@@ -34,6 +37,9 @@ export class ProductsComponent implements OnInit {
     this.ecomdataService.getAllProducts().subscribe({
       next: (response) => {
         this.products = response.data;
+        this.pageSize = response.metadata.limit;
+        this.currentPage = response.metadata.currentPage;
+        this.total = response.results;
       },
     });
   }
@@ -66,6 +72,17 @@ export class ProductsComponent implements OnInit {
       next: (response) => {
         this.toastrService.success(response.message);
         this.wishListData = response.data;
+      },
+    });
+  }
+
+  pageChanged(event: number):void{
+    this.ecomdataService.getAllProducts(event).subscribe({
+      next: (response) => {
+        this.products = response.data;
+        this.pageSize = response.metadata.limit;
+        this.currentPage = response.metadata.currentPage;
+        this.total = response.results;
       },
     });
   }

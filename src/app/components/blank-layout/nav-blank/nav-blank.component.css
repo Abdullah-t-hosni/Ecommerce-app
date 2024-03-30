@@ -296,3 +296,9 @@
   color: white;
   transition: 0.15s ease-in;
 }
+
+
+nav
+{
+  transition: padding 0.9s;
+}
