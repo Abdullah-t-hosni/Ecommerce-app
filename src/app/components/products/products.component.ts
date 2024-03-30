@@ -32,7 +32,7 @@ export class ProductsComponent implements OnInit {
 
     // this._WishListService.wishId.subscribe({
     //   next: (response) => {
-    //     const newData = response.data.map((item: any) => item._id)
+    //     const newData = response.data?.map((item: any) => item._id)
     //     this.wishListData = newData
     //   }
     // })
