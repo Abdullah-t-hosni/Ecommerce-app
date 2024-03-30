@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { Router } from '@angular/router';
 
@@ -8,9 +8,8 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
+  UserData: BehaviorSubject<any | null> = new BehaviorSubject(null);
   constructor(private _HttpClient: HttpClient , private _Router: Router) {}
-
-    UserData:any
 
     logout():void {
       localStorage.removeItem('eToken');
@@ -21,7 +20,7 @@ export class AuthService {
     if (localStorage.getItem('eToken') != null) {
       let encodeToken:any = localStorage.getItem('eToken');
       let decodedToken = jwtDecode(encodeToken);
-      this.UserData = decodedToken
+      this.UserData.next(decodedToken);
     }
   }
 
