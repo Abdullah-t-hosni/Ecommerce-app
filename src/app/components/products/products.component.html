@@ -17,7 +17,7 @@
       <div class="product card child">
         <i (click)="addFav(product._id)" class="fa-regular fa-heart heart"></i>
         <i
-          *ngIf="wishListData.includes(product._id)"
+          *ngIf="wishListData?.includes(product._id)"
           (click)="removeFav(product._id)"
           class="fa-solid fa-heart heart text-danger"
         ></i>

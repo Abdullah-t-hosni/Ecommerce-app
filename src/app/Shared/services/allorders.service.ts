@@ -22,9 +22,9 @@ export class AllordersService {
     this.AllOrdersCount.next(NewNumber);
   }
 
-  getUserOrders(): Observable<any> {
+  getUserOrders(userId: string): Observable<any> {
     return this._HttpClient.get(
-      `https://ecommerce.routemisr.com/api/v1/orders/user/${this._AuthService.UserData.id}`
+      `https://ecommerce.routemisr.com/api/v1/orders/user/${userId}`
     );
   }
   getSingleOrderDetails(id: string | null): Observable<any> {
