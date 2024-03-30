@@ -46,7 +46,7 @@
                 <img
 
                 [routerLink]="['/details', cartDetails._id]"
-                [src]="item.product.imageCover" class="img-fluid me-3 cursor-pointer" [alt]="item.product.title" style="max-width: 100px;" />
+                [src]="item.product.imageCover" class="img-fluid me-3 cursor-pointer" width="100px" [alt]="item.product.title"  />
                 <div>
                   <h5 class="mb-0">{{ item.product.title | termtext : 5 }}</h5>
                   <p class="m-0">Price: <span class="text-main">{{ item.price | currency }}</span></p>

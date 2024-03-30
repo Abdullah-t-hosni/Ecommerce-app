@@ -12,7 +12,7 @@
         ></i>
         <div
           class="p-2 cursor-pointer"
-          [routerLink]="['/details', product._id]"
+          routerLink="['/details', product._id]"
         >
           <img [src]="product.imageCover" class="w-100" [alt]="product.title" />
           <h3 class="h6">{{ product.title | termtext : 2 }}</h3>
@@ -21,7 +21,7 @@
           </h4>
 
           <div class="d-flex justify-content-between align-item-center">
-            <span>{{ product.price | currency : "EUR" }}</span>
+            <span>{{ product.price | currency }}</span>
             <div>
               <i class="fas fa-star rating-color"></i>
               <span class="text-muted">{{ product.ratingsAverage }}</span>

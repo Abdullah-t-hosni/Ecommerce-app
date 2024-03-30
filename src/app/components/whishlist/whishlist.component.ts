@@ -3,6 +3,7 @@ import { Product } from 'src/app/Shared/interfaces/product';
 import { WhishlistService } from 'src/app/Shared/services/whishlist.service';
 import { ToastrService } from 'ngx-toastr';
 import { CartService } from 'src/app/Shared/services/cart.service';
+import { termtextPipe } from '../../termtext.pipe'
 
 @Component({
   selector: 'app-whishlist',

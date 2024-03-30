@@ -1,16 +1,16 @@
-import { Allproducts } from './../../core/interfaces/allproducts';
+import { Allproducts } from '../../../Shared/interfaces/allproducts';
 import { Component, OnInit } from '@angular/core';
-import { BrandsService } from '../../core/services/brands.service';
 import { SpecificBrand } from 'src/app/Shared/interfaces/specific-brand';
 import { ActivatedRoute, Router } from '@angular/router';
-import { OffersService } from '../../core/services/offers.service';
-import { SharedProductsService } from '../../core/services/shared-products.service';
-import { CartService } from '../../core/services/cart.service';
-import { GetHomeproductsService } from '../../core/services/get-homeproducts.service';
+import { OffersService } from '../../../Shared/services/offers.service';
+import { SharedProductsService } from '../../../Shared/services/shared-products.service';
+import { GetHomeproductsService } from '../../../Shared/services/get-homeproducts.service';
 import { ToastrService } from 'ngx-toastr';
-import { WishListService } from '../../core/services/wish-list.service';
-import { Successadd } from '../../core/interfaces/successadd';
+import { Successadd } from '../../../Shared/interfaces/successadd';
 import { Product } from 'src/app/Shared/interfaces/product';
+import { BrandsService } from 'src/app/Shared/services/brands.service';
+import { CartService } from 'src/app/Shared/services/cart.service';
+import { WhishlistService } from 'src/app/Shared/services/whishlist.service';
 
 @Component({
   selector: 'app-subbrand',
@@ -38,7 +38,7 @@ export class SubbrandComponent  {
     private _CartService: CartService,
     private _GetHomeproductsService: GetHomeproductsService,
     private _ToastrService: ToastrService,
-    private _WishListService: WishListService
+    private _WishListService: WhishlistService
   ) {}
 
 
@@ -46,7 +46,7 @@ export class SubbrandComponent  {
 
   ngOnInit(): void {
     this.getCategoryIDFromRoute();
-    this.getUserLogedWishList();
+    // this.getUserLogedWishList();
   }
 
   getCategoryIDFromRoute(): void {
@@ -117,7 +117,7 @@ export class SubbrandComponent  {
         response.data.products.forEach((element) => {
           cartTotalProducts += element.count;
         });
-        this._CartService.updateCartCound(cartTotalProducts);
+        this._CartService.updateCartCount(cartTotalProducts);
         this._ToastrService.success(
           response.message + '<img src="./assets/6828646.png">'
         );
@@ -127,11 +127,10 @@ export class SubbrandComponent  {
       },
     });
   }
-  addToWishList(productId: string | null): void {
-    this._WishListService.addToWisthList(productId).subscribe({
+  addToWishList(productId: string ): void {
+    this._WishListService.addToWishList(productId).subscribe({
       next: (response) => {
         this.currentWishList = response.data;
-        this._WishListService.changeHeartCount(response.data.length);
         this._ToastrService.success(
           response.message +
             `<i class="text-danger fa-solid fa-heart fa-lg"></i>`
@@ -139,10 +138,9 @@ export class SubbrandComponent  {
       },
     });
   }
-  removeFromWishList(productId: string | null): void {
-    this._WishListService.RemoveProductFromWishList(productId).subscribe({
+  removeFromWishList(productId: string ): void {
+    this._WishListService.removeFromWishList(productId).subscribe({
       next: (response) => {
-        this._WishListService.changeHeartCount(response.data.length);
         this.currentWishList = response.data;
         this._ToastrService.warning(
           response.message + ` <i class="fa-solid fa-lg fa-trash"></i>`
@@ -150,16 +148,16 @@ export class SubbrandComponent  {
       },
     });
   }
-  getUserLogedWishList(): void {
-    this._WishListService.currentWishList.subscribe({
-      next: (response) => {
-        if (response) {
-          let wishList = response.data.map((product: any) => product._id);
-          this.currentWishList = wishList;
-        }
-      },
-    });
-  }
+  // getUserLogedWishList(): void {
+  //   this._WishListService.numOfWishItems.subscribe({
+  //     next: (response) => {
+  //       if (response) {
+  //         let wishList = response.data.map((product: any) => product._id);
+  //         this.currentWishList = wishList;
+  //       }
+  //     },
+  //   });
+  // }
   imageIsLoading: boolean = true;
 
   imageLoaded(): void {

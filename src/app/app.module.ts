@@ -32,22 +32,19 @@ import { CartComponent } from './components/cart/cart.component';
 import { FilterProductsPipe } from './filter-products.pipe';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { OrdersComponent } from './components/orders/orders.component';
-import { HttpInterceptorInterceptor } from './interceptors/http.interceptor';
+import { HttpInterceptorInterceptor } from './Shared/interceptors/http.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { LoadingInterceptor } from './Shared/interceptors/loading.interceptor';
 import { WhishlistComponent } from './components/whishlist/whishlist.component';
 import { SubbrandComponent } from './components/brands/subbrand/subbrand.component';
 import { SubcategoryComponent } from './components/categories/subcategory/subcategory.component';
-import { NavigationComponent } from './components/navigation/navigation.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { SettingsComponent } from './components/settings/settings.component';
-import { AddressComponent } from './components/settings/address/address.component';
-import { PrivacySettingComponent } from './components/settings/privacy-setting/privacy-setting.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,10 +75,7 @@ import { PrivacySettingComponent } from './components/settings/privacy-setting/p
     WhishlistComponent,
     SubbrandComponent,
     SubcategoryComponent,
-    NavigationComponent,
-    SettingsComponent,
-    AddressComponent,
-    PrivacySettingComponent,
+
   ],
 
   imports: [

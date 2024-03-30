@@ -4,8 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import {  Router } from '@angular/router';
 import { CartService } from 'src/app/Shared/services/cart.service';
 import { Product } from 'src/app/Shared/interfaces/product';
-import { Allorders } from '../core/interfaces/allorders';
 import { Cart } from 'src/app/Shared/interfaces/cart';
+import { Allorders } from 'src/app/Shared/interfaces/allorders';
 
 @Component({
   selector: 'app-cart',

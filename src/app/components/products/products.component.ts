@@ -3,8 +3,8 @@ import { CartService } from 'src/app/Shared/services/cart.service';
 import { EcomdataService } from 'src/app/Shared/services/ecomdata.service';
 import { Product } from 'src/app/Shared/interfaces/product';
 import { ToastrService } from 'ngx-toastr';
-import { WishListService } from '../core/services/wish-list.service';
-import { AllordersService } from '../core/services/allorders.service';
+import { AllordersService } from 'src/app/Shared/services/allorders.service';
+import { WhishlistService } from 'src/app/Shared/services/whishlist.service';
 
 @Component({
   selector: 'app-products',
@@ -22,7 +22,7 @@ export class ProductsComponent implements OnInit {
     private _ToastrService: ToastrService,
     private _CartService: CartService,
     private _Renderer2: Renderer2,
-    private _WishListService: WishListService,
+    private _WishListService: WhishlistService,
     private _AllordersService: AllordersService
     ) {}
 
@@ -30,12 +30,12 @@ export class ProductsComponent implements OnInit {
     //get All Products..
     this.getAllProducts();
 
-    this._WishListService.userWishList.subscribe({
-      next: (response) => {
-        const newData = response.data.map((item: any) => item._id)
-        this.wishListData = newData
-      }
-    })
+    // this._WishListService.wishId.subscribe({
+    //   next: (response) => {
+    //     const newData = response.data.map((item: any) => item._id)
+    //     this.wishListData = newData
+    //   }
+    // })
   }
 
   getAllProducts() {
@@ -62,7 +62,7 @@ export class ProductsComponent implements OnInit {
   }
 
   addFav(id: string): void {
-    this._WishListService.addToWisthList(id).subscribe({
+    this._WishListService.addToWishList(id).subscribe({
       next: (response) => {
         this._ToastrService.success(response.message);
         this.wishListData = response.data;
@@ -72,7 +72,7 @@ export class ProductsComponent implements OnInit {
 
   removeFav(id: string): void {
 
-    this._WishListService.RemoveProductFromWishList(id).subscribe({
+    this._WishListService.removeFromWishList(id).subscribe({
       next: (response) => {
         this._ToastrService.success(response.message);
         this.wishListData = response.data;

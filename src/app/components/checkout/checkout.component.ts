@@ -20,6 +20,8 @@ export class CheckoutComponent {
 })
 
 constructor(private _CartService:CartService , private _activatedRoute:ActivatedRoute) {
+
+
   this._activatedRoute.paramMap.subscribe((response:any)=>{
   this.cartId = response.params.cartId
   })
@@ -32,9 +34,6 @@ handleOnline(){
   this._CartService.generateOnlinePayment(this.cartId,this.shippingAddress.value).subscribe({
     next: (response) => {
       window.location.href = response.session.url
-
-
-
     },
 
   })

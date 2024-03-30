@@ -19,10 +19,7 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { WhishlistComponent } from './components/whishlist/whishlist.component';
 import { SubbrandComponent } from './components/brands/subbrand/subbrand.component';
 import { SubcategoryComponent } from './components/categories/subcategory/subcategory.component';
-import { SettingsComponent } from './components/settings/settings.component';
-import { AddressComponent } from './components/settings/address/address.component';
-import { PrivacySettingComponent } from './components/settings/privacy-setting/privacy-setting.component';
-import { AccountSettingComponent } from './components/settings/account-setting/account-setting.component';
+
 
 const routes: Routes = [
   {
@@ -42,14 +39,7 @@ const routes: Routes = [
       { path: 'whishlist', component: WhishlistComponent },
       {path: 'specific-brand/:id', component: SubbrandComponent},
       {path: 'subcategory/:id', component: SubcategoryComponent},
-      {path: 'settings' , component: SettingsComponent,
-      children: [
-        {path: 'Account-Settings' , component: AccountSettingComponent},
-        {path: 'Address-Settings', component: AddressComponent},
-        {path: 'Privacy-Settings', component: PrivacySettingComponent}
-      ]
 
-    }
     ],
   },
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AllordersService } from '../core/services/allorders.service';
 import { Allorders } from 'src/app/Shared/interfaces/allorders';
+import { AllordersService } from 'src/app/Shared/services/allorders.service';
 
 @Component({
   selector: 'app-orders',
