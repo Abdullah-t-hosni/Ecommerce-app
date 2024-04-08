@@ -62,6 +62,8 @@ export class WhishlistComponent implements OnInit {
         this.toastrService.success(response.message);
         this.wishListData = response.data;
         this.products = this.products.filter((item) => this.wishListData?.includes(item._id));
+        this.getWishlist();
+
       },
     });
   }

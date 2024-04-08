@@ -1,6 +1,7 @@
 <section class="p-4 rounded mt-5 w-75 mx-auto" *ngIf="wishListData; else emptyWishlist">
-  <h1 class="text-center">Wishlist</h1>
-  <div class="row g-4">
+  <div class="row g-4" *ngIf="wishListData.length && products.length > 0; else emptyWishlist">
+    <h1 class="text-center">Wishlist</h1>
+
     <div class="col-md-2" *ngFor="let product of products">
       <div class="product">
         <i (click)="removeFav(product._id)" class="fa-solid fa-heart heart text-danger"></i>
