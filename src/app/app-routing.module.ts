@@ -24,8 +24,7 @@ import { SubcategoryComponent } from './components/categories/subcategory/subcat
 const routes: Routes = [
   {
     path: '',
-    canActivate: [authGuard],
-    component: BlankLayoutComponent,
+   component: BlankLayoutComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
